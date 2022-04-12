@@ -6,21 +6,22 @@ import android.content.pm.PackageManager
 import android.location.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationRequest
 import com.jaeyoung1.weather.databinding.ActivityMainBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import java.io.BufferedReader
-import java.io.IOException
 import java.io.InputStreamReader
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     private var latitude: Double? = 0.0
     private var longitude: Double? = 0.0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -42,11 +44,16 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        fusedLocationProviderClient()
+
         binding.button.setOnClickListener {
+            Log.d("test3", "$longitude, $latitude ")
+
             getWeather()
             Thread.sleep(1000)
             binding.textView.text = textResult
         }
+
 
     }
 
@@ -81,28 +88,79 @@ class MainActivity : AppCompatActivity() {
             textResult += "${unixTimeChange(time)} $descriptionText \n\n"
         }
 
+
     }
 
+    private fun fusedLocationProviderClient() {
+        // ContextCompat 은 Resource 에서 값을 가져오거나 퍼미션을 확인할 때 사용할 때 SDK 버전을 고려하지 않아도 되도록
+        if (ContextCompat.checkSelfPermission(
+                applicationContext,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                100
+            )
 
 
+        }
 
-   /* override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        val fusedLocationClient: FusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(this)
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                latitude = location.latitude
+                longitude = location.longitude
+            }
+        }
 
-        if(requestCode == REQUEST_CODE_LOCATION){
-            if(grantResults.isNotEmpty()){
-                for(grant in grantResults){
-                    if(grant != PackageManager.PERMISSION_GRANTED){
-                        exitProcess(0)
+        //////
+
+        val locationRequest = LocationRequest.create()
+        //필요한 정확도를 설정하는 값
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        locationRequest.interval = 20000
+        val locationCallBack = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                super.onLocationResult(locationResult)
+                for (location in locationResult.locations) {
+                    if (location != null) {
+                        latitude = location.latitude
+                        longitude = location.longitude
+                        Log.d("AAAA", "$latitude, $longitude")
+
                     }
                 }
             }
         }
+        fusedLocationClient.requestLocationUpdates(
+            locationRequest,
+            locationCallBack,
+            Looper.getMainLooper()
+        )
+    }
 
-    }*/
+
+    /* override fun onRequestPermissionsResult(
+         requestCode: Int,
+         permissions: Array<out String>,
+         grantResults: IntArray
+     ) {
+         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+         if(requestCode == REQUEST_CODE_LOCATION){
+             if(grantResults.isNotEmpty()){
+                 for(grant in grantResults){
+                     if(grant != PackageManager.PERMISSION_GRANTED){
+                         exitProcess(0)
+                     }
+                 }
+             }
+         }
+
+     }*/
 
 }
