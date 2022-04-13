@@ -13,6 +13,21 @@
         android:layout_height="50dp"
         android:id="@+id/button"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/testButton"
+        android:visibility="gone"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/address"
+        android:layout_marginBottom="50dp"
+        android:text="주소가 나올거에오"
+        />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

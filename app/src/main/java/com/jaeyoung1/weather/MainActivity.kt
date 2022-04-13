@@ -3,15 +3,18 @@ package com.jaeyoung1.weather
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.location.*
-import androidx.appcompat.app.AppCompatActivity
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
-import com.google.android.gms.location.LocationRequest
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import com.jaeyoung1.weather.databinding.ActivityMainBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -22,6 +25,7 @@ import java.io.InputStreamReader
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +37,6 @@ class MainActivity : AppCompatActivity() {
     private var latitude: Double? = 0.0
     private var longitude: Double? = 0.0
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -42,16 +45,38 @@ class MainActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar?.hide()
 
-
-
         fusedLocationProviderClient()
 
-        binding.button.setOnClickListener {
-            Log.d("test3", "$longitude, $latitude ")
 
+
+        binding.testButton.setOnClickListener {
+            Log.d("AAA", "AAA")
+            reloadActivity()
+        }
+
+//이유 어떤걸 배우고 싶은지
+
+        for(i in 0..1){
+            if(i == 0){
+                binding.testButton.callOnClick()
+              //  ?????????????????????????????????????????
+            }
+
+
+        }
+
+        binding.button.setOnClickListener {
+
+
+            Log.d("test3", "$longitude, $latitude ")
+            val address = getAddress(latitude!!, longitude!!)
+            binding.address.text = address
+
+            Thread.sleep(3000)
             getWeather()
-            Thread.sleep(1000)
             binding.textView.text = textResult
+            Log.d("testtt", textResult)
+
         }
 
 
@@ -114,6 +139,8 @@ class MainActivity : AppCompatActivity() {
             if (location != null) {
                 latitude = location.latitude
                 longitude = location.longitude
+                Log.d("test0", "$longitude, $latitude ")
+
             }
         }
 
@@ -130,37 +157,67 @@ class MainActivity : AppCompatActivity() {
                     if (location != null) {
                         latitude = location.latitude
                         longitude = location.longitude
-                        Log.d("AAAA", "$latitude, $longitude")
+                        Log.d("test444", "$latitude, $longitude")
 
                     }
                 }
             }
         }
+
+
         fusedLocationClient.requestLocationUpdates(
             locationRequest,
             locationCallBack,
             Looper.getMainLooper()
         )
+
     }
 
+    private fun getAddress(lat: Double, lng: Double): String {
+        val geocoder = Geocoder(this)
+        val list = geocoder.getFromLocation(lat, lng, 1)
 
-    /* override fun onRequestPermissionsResult(
-         requestCode: Int,
-         permissions: Array<out String>,
-         grantResults: IntArray
-     ) {
-         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        return list[0].getAddressLine(0)
+    }
 
-         if(requestCode == REQUEST_CODE_LOCATION){
-             if(grantResults.isNotEmpty()){
-                 for(grant in grantResults){
-                     if(grant != PackageManager.PERMISSION_GRANTED){
-                         exitProcess(0)
-                     }
-                 }
-             }
-         }
+    private fun reloadActivity() {
+        finish()
+        overridePendingTransition(0, 0) //인텐트 효과 없애기
+        val intent = intent
+        startActivity(intent)
+        overridePendingTransition(0, 0)
+    }
 
-     }*/
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        val permissionListener: PermissionListener = object : PermissionListener {
+            override fun onPermissionGranted() {
+                Toast.makeText(this@MainActivity, "권한 허가", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onPermissionDenied(deniedPermissions: ArrayList<String?>) {
+                Toast.makeText(this@MainActivity, "권한 거부\n$deniedPermissions", Toast.LENGTH_SHORT)
+                    .show()
+                exitProcess(0)
+            }
+        }
+
+        TedPermission.with(this)
+            .setPermissionListener(permissionListener)
+            .setRationaleMessage("구글 로그인을 하기 위해서는 권한이 필요해요")
+            .setDeniedMessage("[설정] > [권한] 에서 권한을 허용할 수 있어요.")
+            .setPermissions(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            .check()
+
+    }
+
 
 }
