@@ -1,7 +1,6 @@
 package com.jaeyoung1.weather
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
@@ -13,18 +12,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.*
+import com.google.gson.annotations.SerializedName
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.jaeyoung1.weather.databinding.ActivityMainBinding
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.URL
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
+import retrofit2.http.Query
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
 
 
@@ -34,8 +40,14 @@ class MainActivity : AppCompatActivity() {
     private val binding get() = mBinding!!
 
     private var textResult = ""
-    private var latitude: Double? = 0.0
-    private var longitude: Double? = 0.0
+
+    companion object {
+        private var latitude: Double? = 0.0
+        private var longitude: Double? = 0.0
+        private const val baseURL = "http://api.openweathermap.org/"
+        private const val appId = "01cbde2e5ca2f0fea3d136fe95ce3aa0"
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,34 +59,22 @@ class MainActivity : AppCompatActivity() {
 
         fusedLocationProviderClient()
 
-
-
         binding.testButton.setOnClickListener {
             Log.d("AAA", "AAA")
             reloadActivity()
         }
 
-//이유 어떤걸 배우고 싶은지
 
-        for(i in 0..1){
-            if(i == 0){
-                binding.testButton.callOnClick()
-              //  ?????????????????????????????????????????
-            }
-
-
-        }
 
         binding.button.setOnClickListener {
 
 
-            Log.d("test3", "$longitude, $latitude ")
+            Log.d("test3", "$longitude, $latitude   ")
             val address = getAddress(latitude!!, longitude!!)
             binding.address.text = address
 
-            Thread.sleep(3000)
             getWeather()
-            binding.textView.text = textResult
+
             Log.d("testtt", textResult)
 
         }
@@ -89,30 +89,74 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getWeather(): Job = GlobalScope.launch {  //날씨 시각 얻기
-        textResult = "" //결과 초기화
-        val apiKey = "01cbde2e5ca2f0fea3d136fe95ce3aa0"
-        val apiUrl = "https://api.openweathermap.org/data/2.5/onecall?" +
-                "lat=" + latitude + "&" + "lon=" + longitude + "&" + "lang=" + "ja" +
-                "&" + "APPID=" + apiKey // 장소 언어 key 설정
-        val url = URL(apiUrl)
-        val br = BufferedReader(InputStreamReader(url.openStream())) // 정보 얻기
-        //openStream url 읽기 //Buf StringType or Char 직렬화 //Inp CharType
+        /*  textResult = "" //결과 초기화
+          val apiKey = "01cbde2e5ca2f0fea3d136fe95ce3aa0"
+          val apiUrl = "https://api.openweathermap.org/data/2.5/onecall?" +
+                  "lat=" + latitude + "&" + "lon=" + longitude + "&" + "lang=" + "ja" +
+                  "&" + "APPID=" + apiKey // 장소 언어 key 설정
+          val url = URL(apiUrl)
+          val br = BufferedReader(InputStreamReader(url.openStream())) // 정보 얻기
+          //openStream url 읽기 //Buf StringType or Char 직렬화 //Inp CharType
 
-        val str = br.readText() //문자열화
-        val json = JSONObject(str) //json 형식 데이터로 식별
-        val hourly = json.getJSONArray("hourly") //hourly 배열 획득
+          val str = br.readText() //문자열화
+          val json = JSONObject(str) //json 형식 데이터로 식별
+          val hourly = json.getJSONArray("hourly") //hourly 배열 획득
 
-        //열시간 분 얻기
-        for (i in 0..9) {
-            val getObject = hourly.getJSONObject(i)
-            val weatherList = getObject.getJSONArray("weather").getJSONObject(0)
-            // unix time 형식의 시간 얻기
-            val time = getObject.getString("dt")
-            //날씨얻기
-            val descriptionText = weatherList.getString("description")
-            textResult += "${unixTimeChange(time)} $descriptionText \n\n"
-        }
+          //열시간 분 얻기
+         // for (i in 0..9) {
+              val getObject = hourly.getJSONObject(0)
+              val weatherList = getObject.getJSONArray("weather").getJSONObject(0)
+              // unix time 형식의 시간 얻기
+              val time = getObject.getString("dt")
+              //날씨얻기
+              val descriptionText = weatherList.getString("description")
+              textResult += "${unixTimeChange(time)} $descriptionText \n\n"
+       //   }*/
 
+        val retrofit =
+            Retrofit.Builder().baseUrl(baseURL).addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+
+        val services = retrofit.create(WeatherService::class.java)
+        val call = services.getCurrentWeatherData(latitude.toString(), longitude.toString(), appId)
+
+
+
+
+        //enqueue 인터페이스로부터 함수를 호출할 수 있다.
+        call.enqueue(object : Callback<WeatherResponse> {
+            override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
+                Log.d("result:", t.toString())
+            }
+
+            override fun onResponse(
+                call: Call<WeatherResponse>,
+                response: Response<WeatherResponse>
+            ) {
+                Log.d("GG", "GG")
+                if (response.code() == 200) {
+                    Log.d("GG", "GG")
+                    val weatherResponse = response.body()
+                    Log.d("result2", weatherResponse.toString())
+                    val cTemp = weatherResponse!!.main!!.temp - 273.15
+                    val minTemp = weatherResponse.main!!.tempMin - 273.15
+                    val maxTemp = weatherResponse.main!!.tempMax - 273.15
+                    val stringBuilder = "지역 : " + weatherResponse.sys!!.country + "/n" +
+                            "현재 기온 : " + cTemp + "/n" +
+                            "최저기온 : " + minTemp + "/n" +
+                            "최고기온 : " + maxTemp + "/n" +
+                            "풍속 : " + weatherResponse.wind!!.speed + "/n" +
+                            "일출시간 : " + weatherResponse.sys!!.sunrise + "/n" +
+                            "일몰시간 : " + weatherResponse.sys!!.sunset + "/n" +
+                            "아이콘 : " + weatherResponse.weather[0].icon
+
+                    binding.textView.text = stringBuilder
+                }
+
+            }
+
+        })
 
     }
 
@@ -221,3 +265,81 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+interface WeatherService {
+
+    @GET("data/2.5/weather")
+    fun getCurrentWeatherData(
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
+        @Query("appId") appId: String
+    ): Call<WeatherResponse>
+
+}
+
+class WeatherResponse {
+    @SerializedName("weather")
+    var weather = ArrayList<Weather>()
+
+    @SerializedName("main")
+    var main: Main? = null
+
+    @SerializedName("wind")
+    var wind: Wind? = null
+
+    @SerializedName("sys")
+    var sys: Sys? = null
+}
+
+class Weather {
+    @SerializedName("id")
+    var id: Int = 0
+
+    @SerializedName("main")
+    var main: String? = null
+
+    @SerializedName("description")
+    var description: String? = null
+
+    @SerializedName("icon")
+    var icon: String? = null
+}
+
+class Main {
+    @SerializedName("temp")
+    var temp: Float = 0.toFloat()
+
+    @SerializedName("humidity")
+    var humidity: Float = 0.toFloat()
+
+    @SerializedName("pressure")
+    var pressure: Float = 0.toFloat()
+
+    @SerializedName("temp_min")
+    var tempMin: Float = 0.toFloat()
+
+    @SerializedName("temp_max")
+    var tempMax: Float = 0.toFloat()
+}
+
+class Wind {
+    @SerializedName("speed")
+    var speed: Float = 0.toFloat()
+
+    @SerializedName("deg")
+    var deg: Float = 0.toFloat()
+}
+
+class Sys {
+    @SerializedName("country")
+    var country: String? = null
+
+    @SerializedName("sunrise")
+    var sunrise: Long = 0
+
+    @SerializedName("sunset")
+    var sunset: Long = 0
+}
+
+
+
