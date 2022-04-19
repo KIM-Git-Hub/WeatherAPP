@@ -35,6 +35,7 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 import kotlin.system.exitProcess
 
 
@@ -45,13 +46,13 @@ class MainActivity : AppCompatActivity() {
 
     private var textResult = ""
 
+
     companion object {
         private var latitude: Double? = 0.0
         private var longitude: Double? = 0.0
         private const val baseURL = "http://api.openweathermap.org/"
         private const val appId = "01cbde2e5ca2f0fea3d136fe95ce3aa0"
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,12 +77,12 @@ class MainActivity : AppCompatActivity() {
 
             Log.d("test3", "$longitude, $latitude   ")
             val address = getAddress(latitude!!, longitude!!)
-
-
             binding.address.text = address
-
             getWeather()
             getOneDayWeather()
+            getTestWeather()
+            Thread.sleep(1000)
+            binding.oneDayWeather.text = textResult
 
 
         }
@@ -144,13 +145,52 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun getTestWeather(): Job = GlobalScope.launch {
+
+        val retrofit =
+            Retrofit.Builder().baseUrl(baseURL).addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+
+        val services = retrofit.create(WeatherService::class.java)
+        val call = services.getTestWeatherData(latitude.toString(), longitude.toString(), appId)
+
+        //enqueue 인터페이스로부터 함수를 호출할 수 있다.
+        call.enqueue(object : Callback<TestWeatherResponse> {
+            override fun onFailure(call: Call<TestWeatherResponse>, t: Throwable) {
+                Log.d("result:", t.toString())
+            }
+
+            override fun onResponse(
+                call: Call<TestWeatherResponse>,
+                response: Response<TestWeatherResponse>
+            ) {
+                Log.d("GG2", "GG")
+                if (response.code() == 200) {
+                    Log.d("GG2", "GG2")
+                    val weatherResponse = response.body()
+                    Log.d("result2", weatherResponse.toString())
+
+                    val stringBuilder = weatherResponse!!.daily[2].sunset
+
+
+                    Log.d("tetest", stringBuilder.toString())
+                }
+
+            }
+
+        })
+
+    }
+
     private fun unixTimeChange(unixTime: String): String {
         val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.JAPANESE)
         val nowTime = Date(unixTime.toInt() * 1000L)
         return sdf.format(nowTime)
     }
 
-    private fun getOneDayWeather() {  //////////errorrrrr
+    private fun getOneDayWeather() : Job = GlobalScope.launch{
+
         textResult = "" //결과 초기화
         val apiKey = "01cbde2e5ca2f0fea3d136fe95ce3aa0"
         val apiUrl = "https://api.openweathermap.org/data/2.5/onecall?" +
@@ -162,19 +202,24 @@ class MainActivity : AppCompatActivity() {
         val str = br.readText() //문자열화
         val json = JSONObject(str) //json 형식 데이터로 식별
         val hourly = json.getJSONArray("hourly") //hourly 배열 획득
+
+
+
         //열시간 분 얻기
         for (i in 0..9) {
-            val getObject = hourly.getJSONObject(0)
+            val getObject = hourly.getJSONObject(i) //갯수
             val weatherList = getObject.getJSONArray("weather").getJSONObject(0)
             // unix time 형식의 시간 얻기
             val time = getObject.getString("dt")
             //날씨얻기
             val descriptionText = weatherList.getString("description")
 
-            val test = "${unixTimeChange(time)}, $descriptionText "
-            binding.oneDayWeather.text = test
+            textResult += "${unixTimeChange(time)}, $descriptionText \n"
+
         }
     }
+
+
 
     private fun fusedLocationProviderClient() {
         // ContextCompat 은 Resource 에서 값을 가져오거나 퍼미션을 확인할 때 사용할 때 SDK 버전을 고려하지 않아도 되도록
@@ -291,6 +336,14 @@ interface WeatherService {
         @Query("appId") appId: String
     ): Call<WeatherResponse>
 
+    @GET("data/2.5/onecall")
+    fun getTestWeatherData(
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
+        @Query("appId") appId: String
+    ): Call<TestWeatherResponse>
+
+
 }
 
 class WeatherResponse {
@@ -307,6 +360,11 @@ class WeatherResponse {
     var sys: Sys? = null
 }
 
+class TestWeatherResponse{
+    @SerializedName("daily")
+    var daily = ArrayList<Daily>()
+}
+
 class Weather {
     @SerializedName("id")
     var id: Int = 0
@@ -319,6 +377,13 @@ class Weather {
 
     @SerializedName("icon")
     var icon: String? = null
+}
+
+class Daily{
+    @SerializedName("sunrise")
+    var sunrise: Long = 0
+    @SerializedName("sunset")
+    var sunset: Long = 0
 }
 
 class Main {
