@@ -16,12 +16,10 @@ import com.google.gson.annotations.SerializedName
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.jaeyoung1.weather.databinding.ActivityMainBinding
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,13 +27,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
+import kotlin.math.roundToLong
 import kotlin.system.exitProcess
 
 
@@ -43,8 +38,6 @@ class MainActivity : AppCompatActivity() {
 
     private var mBinding: ActivityMainBinding? = null
     private val binding get() = mBinding!!
-
-    private var textResult = ""
 
 
     companion object {
@@ -79,10 +72,8 @@ class MainActivity : AppCompatActivity() {
             val address = getAddress(latitude!!, longitude!!)
             binding.address.text = address
             getWeather()
-            getOneDayWeather()
-            getTestWeather()
+            getDailyWeather()
             Thread.sleep(1000)
-            binding.oneDayWeather.text = textResult
 
 
         }
@@ -110,31 +101,40 @@ class MainActivity : AppCompatActivity() {
         val call = services.getCurrentWeatherData(latitude.toString(), longitude.toString(), appId)
 
         //enqueue 인터페이스로부터 함수를 호출할 수 있다.
-        call.enqueue(object : Callback<WeatherResponse> {
-            override fun onFailure(call: Call<WeatherResponse>, t: Throwable) {
+        call.enqueue(object : Callback<CurrentWeatherResponse> {
+            override fun onFailure(call: Call<CurrentWeatherResponse>, t: Throwable) {
                 Log.d("result:", t.toString())
             }
 
             override fun onResponse(
-                call: Call<WeatherResponse>,
-                response: Response<WeatherResponse>
+                call: Call<CurrentWeatherResponse>,
+                response: Response<CurrentWeatherResponse>
             ) {
                 Log.d("GG", "GG")
                 if (response.code() == 200) {
                     Log.d("GG", "GG")
                     val weatherResponse = response.body()
                     Log.d("result2", weatherResponse.toString())
-                    val cTemp = weatherResponse!!.main!!.temp - 273.15
-                    val minTemp = weatherResponse.main!!.tempMin - 273.15
-                    val maxTemp = weatherResponse.main!!.tempMax - 273.15
+
+                    val lTemp = weatherResponse!!.main!!.temp - 273.15
+                    val cTemp = lTemp.roundToLong()
+                    val lMinTemp = weatherResponse.main!!.tempMin - 273.15
+                    val minTemp = lMinTemp.roundToLong()
+                    val lMaxTemp = weatherResponse.main!!.tempMax - 273.15
+                    val maxTemp = lMaxTemp.roundToLong()
+
+                    val lIcon = weatherResponse.weather[0].icon
+                    val iconUrl = "http://openweathermap.org/img/w/$lIcon.png"
+                    Picasso.get().load(iconUrl).into(binding.currentWeatherIcon)
+
                     val stringBuilder =
-                        "현재 기온 : " + cTemp + "\n" +
-                                "최저기온 : " + minTemp + "\n" +
-                                "최고기온 : " + maxTemp + "\n" +
+                        "현재 기온 : " + cTemp + "도" + "\n" +
+                                "최저기온 : " + minTemp + "도" + "\n" +
+                                "최고기온 : " + maxTemp + "도" + "\n" +
                                 "풍속 : " + weatherResponse.wind!!.speed + "\n" +
                                 "일출시간 : " + weatherResponse.sys!!.sunrise + "\n" +
-                                "일몰시간 : " + weatherResponse.sys!!.sunset + "\n" +
-                                "아이콘 : " + weatherResponse.weather[0].icon
+                                "일몰시간 : " + weatherResponse.sys!!.sunset + "\n"
+
 
                     binding.textView.text = stringBuilder
                 }
@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getTestWeather(): Job = GlobalScope.launch {
+    private fun getDailyWeather(): Job = GlobalScope.launch {
 
         val retrofit =
             Retrofit.Builder().baseUrl(baseURL).addConverterFactory(GsonConverterFactory.create())
@@ -153,28 +153,61 @@ class MainActivity : AppCompatActivity() {
 
 
         val services = retrofit.create(WeatherService::class.java)
-        val call = services.getTestWeatherData(latitude.toString(), longitude.toString(), appId)
+        val call = services.getDailyWeatherData(latitude.toString(), longitude.toString(), appId)
 
         //enqueue 인터페이스로부터 함수를 호출할 수 있다.
-        call.enqueue(object : Callback<TestWeatherResponse> {
-            override fun onFailure(call: Call<TestWeatherResponse>, t: Throwable) {
+        call.enqueue(object : Callback<DailyWeatherResponse> {
+            override fun onFailure(call: Call<DailyWeatherResponse>, t: Throwable) {
                 Log.d("result:", t.toString())
             }
 
             override fun onResponse(
-                call: Call<TestWeatherResponse>,
-                response: Response<TestWeatherResponse>
+                call: Call<DailyWeatherResponse>,
+                response: Response<DailyWeatherResponse>
             ) {
+
                 Log.d("GG2", "GG")
                 if (response.code() == 200) {
                     Log.d("GG2", "GG2")
                     val weatherResponse = response.body()
                     Log.d("result2", weatherResponse.toString())
 
-                    val stringBuilder = weatherResponse!!.daily[2].sunset
+                    val lMaxTemp = weatherResponse!!.daily[2].temp!!.max - 273.15
+                    val maxTemp = lMaxTemp.roundToLong()
+                    val lMinTemp = weatherResponse.daily[2].temp!!.min - 273.15
+                    val minTemp = lMinTemp.roundToLong()
+                    val lPop = (weatherResponse.daily[2].pop) * 100
+                    val pop = lPop.roundToLong()
+                    val dailyTime = (weatherResponse.daily[2].dt).toString()
+                    val unixTime = unixTimeChange(dailyTime)
+                    val dailyUnixTime = unixTime.substring(0 until 11)
+                    val dIcon = weatherResponse.daily[2].weather[0].icon
+                    val dailyIconUrl = "http://openweathermap.org/img/w/$dIcon.png"
+                    Picasso.get().load(dailyIconUrl).into(binding.dailyWeatherIcon)
+
+                    val stringBuilder =
+                        dailyUnixTime +  "최고온도 : " + maxTemp + "\n" +
+                                "최저온도 : " + minTemp + "\n" +
+                                "강수확률 : " + pop + "%"
 
 
-                    Log.d("tetest", stringBuilder.toString())
+                    binding.dailyWeatherText.text = stringBuilder
+                    Log.d("tete", stringBuilder)
+
+
+                    val hourlyTime = (weatherResponse.hourly[2].dt).toString()
+                    val unixTime2 = unixTimeChange(hourlyTime)
+                    val hourlyUnixTime = unixTime2.substring(11 until 16)
+                    val lHourlyTemp = weatherResponse.hourly[2].temp - 273.15
+                    val hourlyTemp = lHourlyTemp.roundToLong()
+                    val hourlyWeather = weatherResponse.hourly[2].weather[0].description
+                    val hIcon = weatherResponse.hourly[2].weather[0].icon
+                    val hourlyIconUrl = "http://openweathermap.org/img/w/$hIcon.png"
+                    Picasso.get().load(hourlyIconUrl).into(binding.hourlyWeatherIcon)
+
+                    val stringBuilder2 = hourlyUnixTime + "\n" + " 온도 : " +
+                            hourlyTemp + "\n" + " 날씨 : " + hourlyWeather
+                    binding.hourlyWeatherText.text = stringBuilder2
                 }
 
             }
@@ -187,36 +220,6 @@ class MainActivity : AppCompatActivity() {
         val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.JAPANESE)
         val nowTime = Date(unixTime.toInt() * 1000L)
         return sdf.format(nowTime)
-    }
-
-    private fun getOneDayWeather() : Job = GlobalScope.launch{
-
-        textResult = "" //결과 초기화
-        val apiKey = "01cbde2e5ca2f0fea3d136fe95ce3aa0"
-        val apiUrl = "https://api.openweathermap.org/data/2.5/onecall?" +
-                "lat=" + latitude + "&" + "lon=" + longitude + "&" + "lang=" + "ja" +
-                "&" + "APPID=" + apiKey // 장소 언어 key 설정
-        val url = URL(apiUrl)
-        val br = BufferedReader(InputStreamReader(url.openStream())) // 정보 얻기
-        //openStream url 읽기 //Buf StringType or Char 직렬화 //Inp CharType
-        val str = br.readText() //문자열화
-        val json = JSONObject(str) //json 형식 데이터로 식별
-        val hourly = json.getJSONArray("hourly") //hourly 배열 획득
-
-
-
-        //열시간 분 얻기
-        for (i in 0..9) {
-            val getObject = hourly.getJSONObject(i) //갯수
-            val weatherList = getObject.getJSONArray("weather").getJSONObject(0)
-            // unix time 형식의 시간 얻기
-            val time = getObject.getString("dt")
-            //날씨얻기
-            val descriptionText = weatherList.getString("description")
-
-            textResult += "${unixTimeChange(time)}, $descriptionText \n"
-
-        }
     }
 
 
@@ -334,19 +337,85 @@ interface WeatherService {
         @Query("lat") lat: String,
         @Query("lon") lon: String,
         @Query("appId") appId: String
-    ): Call<WeatherResponse>
+    ): Call<CurrentWeatherResponse>
 
     @GET("data/2.5/onecall")
-    fun getTestWeatherData(
+    fun getDailyWeatherData(
         @Query("lat") lat: String,
         @Query("lon") lon: String,
         @Query("appId") appId: String
-    ): Call<TestWeatherResponse>
-
+    ): Call<DailyWeatherResponse>
 
 }
 
-class WeatherResponse {
+//dailyWeather
+//////////////////////////////////////////////////////////////
+
+class DailyWeatherResponse {
+    @SerializedName("daily")
+    var daily = ArrayList<Daily>()
+
+    @SerializedName("hourly")
+    var hourly = ArrayList<Hourly>()
+
+}
+
+class Daily {
+    @SerializedName("weather")
+    var weather = ArrayList<DailyWeather>()
+
+    @SerializedName("temp")
+    var temp: Temp? = null
+
+    @SerializedName("pop")
+    var pop: Float = 0.toFloat()
+
+    @SerializedName("dt")
+    var dt: Int = 0
+}
+
+class DailyWeather {
+    @SerializedName("icon")
+    var icon: String? = null
+}
+
+
+class Temp {
+    @SerializedName("max")
+    var max: Float = 0.toFloat()
+
+    @SerializedName("min")
+    var min: Float = 0.toFloat()
+}
+
+//hourlyWeather
+//////////////////////////////////////////////////////////////
+
+
+class Hourly {
+    @SerializedName("dt")
+    var dt: Int = 0
+
+    @SerializedName("temp")
+    var temp: Float = 0.toFloat()
+
+    @SerializedName("weather")
+    var weather = ArrayList<HourlyWeather>()
+}
+
+class HourlyWeather {
+    @SerializedName("description")
+    var description: String? = null
+
+    @SerializedName("icon")
+    var icon: String? = null
+}
+
+
+//currentWeather
+//////////////////////////////////////////////////////////////
+
+class CurrentWeatherResponse {
     @SerializedName("weather")
     var weather = ArrayList<Weather>()
 
@@ -358,11 +427,6 @@ class WeatherResponse {
 
     @SerializedName("sys")
     var sys: Sys? = null
-}
-
-class TestWeatherResponse{
-    @SerializedName("daily")
-    var daily = ArrayList<Daily>()
 }
 
 class Weather {
@@ -379,12 +443,6 @@ class Weather {
     var icon: String? = null
 }
 
-class Daily{
-    @SerializedName("sunrise")
-    var sunrise: Long = 0
-    @SerializedName("sunset")
-    var sunset: Long = 0
-}
 
 class Main {
     @SerializedName("temp")

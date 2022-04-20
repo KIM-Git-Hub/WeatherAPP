@@ -54,15 +54,12 @@ dependencies {
     //레트로핏2
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-
-
     //위치
     implementation 'com.google.android.gms:play-services-location:19.0.1'
 
     //코루틴
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2"
-    //gson
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
+
     // tedPermission
     implementation 'gun0912.ted:tedpermission:2.0.0'
     // cardView
@@ -71,6 +68,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
     implementation "com.squareup.okhttp3:okhttp-urlconnection:4.9.1"
-
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }

@@ -19,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -30,6 +31,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|center" />
+
+        <ImageView
+            android:id="@+id/currentWeatherIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
         <TextView
             android:id="@+id/address"
@@ -45,9 +51,7 @@
 
 
 
-
     </LinearLayout>
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -61,10 +65,16 @@
 
 
         <TextView
-            android:layout_gravity="center_horizontal"
+            android:id="@+id/hourlyWeatherText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/oneDayWeather"/>
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/hourlyWeatherIcon"/>
 
 
     </androidx.cardview.widget.CardView>
@@ -73,21 +83,25 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/test"/>
+            <TextView
+                android:id="@+id/dailyWeatherText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/dailyWeatherIcon"/>
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
-
-
 
 
 </LinearLayout>
