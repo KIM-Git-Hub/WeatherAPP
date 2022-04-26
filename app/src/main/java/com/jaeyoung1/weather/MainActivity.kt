@@ -1,17 +1,24 @@
 package com.jaeyoung1.weather
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.location.LocationListener
 import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
-import android.os.Looper
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.gson.annotations.SerializedName
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
@@ -34,7 +41,7 @@ import kotlin.math.roundToLong
 import kotlin.system.exitProcess
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), LocationListener {
 
     private var mBinding: ActivityMainBinding? = null
     private val binding get() = mBinding!!
@@ -47,39 +54,72 @@ class MainActivity : AppCompatActivity() {
         private const val appId = "01cbde2e5ca2f0fea3d136fe95ce3aa0"
     }
 
+    private lateinit var locationManager: LocationManager
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            // 使用が許可された
+            locationStart()
+
+        } else {
+            // それでも拒否された時の対応
+            val toast = Toast.makeText(this,
+                "これ以上なにもできません", Toast.LENGTH_SHORT)
+            toast.show()
+
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+        } else {
+            locationStart()
+        }
+
         val actionBar = supportActionBar
         actionBar?.hide()
-
+        //fusedLocationProviderClient()
         getDate()
-        fusedLocationProviderClient()
 
-        binding.testButton.setOnClickListener {
-            Log.d("AAA", "AAA")
+        Log.d("Sex", latitude.toString())
+
+
+
+        binding.test.setOnClickListener {
+
             reloadActivity()
+
+            Log.d("AA", "AA")
         }
 
 
 
-        binding.button.setOnClickListener {
 
-
+        binding.test2.setOnClickListener {
             Log.d("test3", "$longitude, $latitude   ")
             val address = getAddress(latitude!!, longitude!!)
             binding.address.text = address
             getWeather()
             getDailyWeather()
-            Thread.sleep(1000)
-
 
         }
 
 
+
+
+
+
+
     }
+
 
     private fun getDate() {
         val c = Calendar.getInstance()
@@ -127,16 +167,9 @@ class MainActivity : AppCompatActivity() {
                     val iconUrl = "http://openweathermap.org/img/w/$lIcon.png"
                     Picasso.get().load(iconUrl).into(binding.currentWeatherIcon)
 
-                    val stringBuilder =
-                        "현재 기온 : " + cTemp + "도" + "\n" +
-                                "최저기온 : " + minTemp + "도" + "\n" +
-                                "최고기온 : " + maxTemp + "도" + "\n" +
-                                "풍속 : " + weatherResponse.wind!!.speed + "\n" +
-                                "일출시간 : " + weatherResponse.sys!!.sunrise + "\n" +
-                                "일몰시간 : " + weatherResponse.sys!!.sunset + "\n"
+                    val stringBuilder = "$cTemp°"
 
-
-                    binding.textView.text = stringBuilder
+                    binding.currentTemp.text = stringBuilder
                 }
 
             }
@@ -186,7 +219,7 @@ class MainActivity : AppCompatActivity() {
                     Picasso.get().load(dailyIconUrl).into(binding.dailyWeatherIcon)
 
                     val stringBuilder =
-                        dailyUnixTime +  "최고온도 : " + maxTemp + "\n" +
+                        dailyUnixTime + "최고온도 : " + maxTemp + "\n" +
                                 "최저온도 : " + minTemp + "\n" +
                                 "강수확률 : " + pop + "%"
 
@@ -223,34 +256,38 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    private fun fusedLocationProviderClient() {
+   /* private fun fusedLocationProviderClient() {
         // ContextCompat 은 Resource 에서 값을 가져오거나 퍼미션을 확인할 때 사용할 때 SDK 버전을 고려하지 않아도 되도록
         if (ContextCompat.checkSelfPermission(
                 applicationContext,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) !=
-            PackageManager.PERMISSION_GRANTED
+            PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                applicationContext,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
                 100
             )
 
 
         }
 
+
         val fusedLocationClient: FusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(this)
         fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+
             if (location != null) {
                 latitude = location.latitude
                 longitude = location.longitude
                 Log.d("test0", "$longitude, $latitude ")
-
             }
         }
+
 
         val locationRequest = LocationRequest.create()
         //필요한 정확도를 설정하는 값
@@ -267,8 +304,12 @@ class MainActivity : AppCompatActivity() {
 
                     }
                 }
+
+
             }
         }
+
+
 
 
         fusedLocationClient.requestLocationUpdates(
@@ -277,7 +318,72 @@ class MainActivity : AppCompatActivity() {
             Looper.getMainLooper()
         )
 
+
+    }*/
+
+    private fun locationStart() {
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            Log.d("debug", "location manager Enabled")
+        } else {
+            // to prompt setting up GPS
+            val settingsIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+            startActivity(settingsIntent)
+            Log.d("debug", "not gpsEnable, startActivity")
+        }
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1000)
+
+            Log.d("debug", "checkSelfPermission false")
+
+        }
+
+        val fusedLocationClient: FusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(this)
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+
+            if (location != null) {
+                latitude = location.latitude
+                longitude = location.longitude
+                binding.test2.callOnClick()
+                Log.d("testLast", "$longitude, $latitude ")
+            }
+        }
+
+        locationManager.requestLocationUpdates(
+            LocationManager.GPS_PROVIDER,
+            10000,
+            50f,
+            this)
+
     }
+    override fun onLocationChanged(location: Location) {
+        // Latitude
+        latitude = location.latitude
+
+        // Longitude
+        longitude = location.longitude
+
+        binding.test2.callOnClick()
+
+        Log.d("test", "${latitude.toString()}, ${longitude.toString()}")
+    }
+
+    override fun onProviderEnabled(provider: String) {
+
+    }
+
+    override fun onProviderDisabled(provider: String) {
+
+    }
+
+
+
 
     private fun getAddress(lat: Double, lng: Double): String {
         val geocoder = Geocoder(this)
@@ -293,7 +399,9 @@ class MainActivity : AppCompatActivity() {
         overridePendingTransition(0, 0) //인텐트 효과 없애기
         val intent = intent
         startActivity(intent)
+        Log.d("AAAA", "AAAAA")
         overridePendingTransition(0, 0)
+        finish()
     }
 
     override fun onRequestPermissionsResult(
@@ -306,6 +414,8 @@ class MainActivity : AppCompatActivity() {
         val permissionListener: PermissionListener = object : PermissionListener {
             override fun onPermissionGranted() {
                 Toast.makeText(this@MainActivity, "권한 허가", Toast.LENGTH_SHORT).show()
+
+
             }
 
             override fun onPermissionDenied(deniedPermissions: ArrayList<String?>) {
@@ -329,6 +439,8 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+
 
 interface WeatherService {
 
