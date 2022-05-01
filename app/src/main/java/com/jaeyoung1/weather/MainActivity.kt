@@ -8,9 +8,11 @@ import android.location.Geocoder
 import android.location.LocationListener
 import android.location.Location
 import android.location.LocationManager
+import android.opengl.Visibility
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 
@@ -94,20 +96,10 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         val actionBar = supportActionBar
         actionBar?.hide()
-        getDate()
+
 
     }
 
-
-    private fun getDate() {
-        val c = Calendar.getInstance()
-        val currentYear = c.get(Calendar.YEAR)
-        val currentMonth = c.get(Calendar.MONTH) + 1
-        val currentDay = c.get(Calendar.DAY_OF_MONTH)
-        val currentDate: String = "$currentYear" + "年" + " " + "$currentMonth" +
-                "月" + " " + "$currentDay" + "日"
-        binding.currentTimeText.text = currentDate
-    }
 
     private fun getWeather(): Job = GlobalScope.launch {
         val retrofit =
@@ -141,9 +133,9 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     val feelsLike = lFeelsLike.roundToLong()
                     val sunriseSunsetTime = SimpleDateFormat("HH:mm a", Locale.JAPANESE)
                     val lSunrise = weatherResponse.sys!!.sunrise
-                    val sunrise = sunriseSunsetTime.format(lSunrise*1000L)
+                    val sunrise = sunriseSunsetTime.format(lSunrise * 1000L)
                     val lSunset = weatherResponse.sys!!.sunset
-                    val sunset = sunriseSunsetTime.format(lSunset*1000L)
+                    val sunset = sunriseSunsetTime.format(lSunset * 1000L)
                     val lHumidity = weatherResponse.main!!.humidity
                     val humidity = lHumidity.roundToLong()
                     val lWindSpeed = weatherResponse.wind!!.speed
@@ -151,14 +143,34 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     val lWindDeg = weatherResponse.wind!!.deg
                     val windDeg = windDegPosition(lWindDeg)
                     val lIcon = weatherResponse.weather[0].icon
-                    val iconUrl = "http://openweathermap.org/img/w/$lIcon.png"
-                    Picasso.get().load(iconUrl).into(binding.currentWeatherIcon)
+                    Log.d("icon", lIcon.toString())
+                    when (lIcon) {
+                        "01d" -> binding.clearSky.visibility = View.VISIBLE
+                        "02d" -> binding.fewClouds.visibility = View.VISIBLE
+                        "03d" -> binding.clouds.visibility = View.VISIBLE
+                        "04d" -> binding.clouds.visibility = View.VISIBLE
+                        "09d" -> binding.rain.visibility = View.VISIBLE
+                        "10d" -> binding.rain.visibility = View.VISIBLE
+                        "11d" -> binding.thunder.visibility = View.VISIBLE
+                        "13d" -> binding.snow.visibility = View.VISIBLE
+                        "50d" -> binding.mist.visibility = View.VISIBLE
+                        "01n" -> binding.clearSky.visibility = View.VISIBLE
+                        "02n" -> binding.fewClouds.visibility = View.VISIBLE
+                        "03n" -> binding.clouds.visibility = View.VISIBLE
+                        "04n" -> binding.clouds.visibility = View.VISIBLE
+                        "09n" -> binding.rain.visibility = View.VISIBLE
+                        "10n" -> binding.rain.visibility = View.VISIBLE
+                        "11n" -> binding.thunder.visibility = View.VISIBLE
+                        "13n" -> binding.snow.visibility = View.VISIBLE
+                        "50n" -> binding.mist.visibility = View.VISIBLE
+                    }
+
 
                     val cTempString = "$cTemp°"
-                    val feelsLikeString = "$feelsLike° 体感温度"
+                    val feelsLikeString = "体感温度$feelsLike°"
                     val cMaxMinTempString = "$minTemp°/$maxTemp°"
                     val sunriseSunsetString = "$sunrise/$sunset"
-                    val humidityString = "$humidity%"
+                    val humidityString = "湿度$humidity%"
                     val windSpeedDegString = "$windSpeed m/s, $windDeg"
 
                     binding.currentTemp.text = cTempString
@@ -197,9 +209,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                 response: Response<DailyWeatherResponse>
             ) {
 
-                Log.d("GGd", "GG")
                 if (response.code() == 200) {
-                    Log.d("GGdd", "GG2")
                     val weatherResponse = response.body()
 
                     for (i in 1..7) {
@@ -226,10 +236,10 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
                     //currentPop
                     val lPop = (weatherResponse!!.daily[0].pop) * 100
-                    val cPop = lPop.roundToLong().toString() + "%"
+                    val cPop = "降水確率" + lPop.roundToLong().toString() + "%"
                     binding.currentPop.text = cPop
 
-                    for (i in 0..12) {
+                    for (i in 1..13) {
                         val hourlyTime = (weatherResponse.hourly[i].dt).toString()
                         val unixTime2 = unixTimeChange(hourlyTime)
                         val hourlyUnixTime = unixTime2.substring(11 until 16)
@@ -237,14 +247,16 @@ class MainActivity : AppCompatActivity(), LocationListener {
                         val hourlyTemp = lHourlyTemp.roundToLong()
                         val hourlyWeather = weatherResponse.hourly[i].weather[0].main
                         val hIcon = weatherResponse.hourly[i].weather[0].icon
-                        val hourlyIconUrl = "http://openweathermap.org/img/w/$hIcon.png"
-                        Picasso.get().load(hourlyIconUrl).into(binding.hourlyWeatherIcon)
-                        stringBuilder2 += hourlyUnixTime + "\n" + " 온도 : " +
-                                hourlyTemp + "\n" + " 날씨 : " + hourlyWeather + "\n"
+                        val hourlyIconUrl1 = "http://openweathermap.org/img/w/$hIcon.png"
+                        val lHourlyPop = weatherResponse.hourly[i].pop
+                        val hourlyPop = lHourlyPop.roundToLong().toString() + "%"
+
+                   //     Picasso.get().load(hourlyIconUrl1).into(binding.hourlyWeatherIcon1)
+
+                        stringBuilder2 += "$hourlyUnixTime     $hourlyWeather     $hourlyTemp°     $hourlyPop \n\n"
 
 
                     }
-
 
                     binding.hourlyWeatherText.text = stringBuilder2
 
@@ -389,15 +401,15 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
 }
 
-fun windDegPosition(windDeg : Float): String {
-    if (windDeg>337.5) return "北"
-    if (windDeg>292.5) return "北西"
-    if(windDeg>247.5) return "西"
-    if(windDeg>202.5) return "南西"
-    if(windDeg>157.5) return "南"
-    if(windDeg>122.5) return "東南"
-    if(windDeg>67.5) return "東"
-    if(windDeg>22.5) return "東北"
+fun windDegPosition(windDeg: Float): String {
+    if (windDeg > 337.5) return "北"
+    if (windDeg > 292.5) return "北西"
+    if (windDeg > 247.5) return "西"
+    if (windDeg > 202.5) return "南西"
+    if (windDeg > 157.5) return "南"
+    if (windDeg > 122.5) return "東南"
+    if (windDeg > 67.5) return "東"
+    if (windDeg > 22.5) return "東北"
     return "北"
 }
 
@@ -472,6 +484,9 @@ class Hourly {
 
     @SerializedName("weather")
     var weather = ArrayList<HourlyWeather>()
+
+    @SerializedName("pop")
+    var pop: Float = 0.toFloat()
 }
 
 class HourlyWeather {
