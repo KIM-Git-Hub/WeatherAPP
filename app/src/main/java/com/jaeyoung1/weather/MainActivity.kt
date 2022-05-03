@@ -57,7 +57,10 @@ class MainActivity : AppCompatActivity(), LocationListener {
     }
 
     var stringBuilder = ""
-    var stringBuilder2 = ""
+    var hourlyTimeText = ""
+    var hourlyTempText = ""
+    var hourlyPopText = ""
+
 
     private lateinit var locationManager: LocationManager
     private val requestPermissionLauncher = registerForActivityResult(
@@ -239,26 +242,246 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     val cPop = "降水確率" + lPop.roundToLong().toString() + "%"
                     binding.currentPop.text = cPop
 
-                    for (i in 1..13) {
-                        val hourlyTime = (weatherResponse.hourly[i].dt).toString()
-                        val unixTime2 = unixTimeChange(hourlyTime)
-                        val hourlyUnixTime = unixTime2.substring(11 until 16)
-                        val lHourlyTemp = weatherResponse.hourly[i].temp - 273.15
-                        val hourlyTemp = lHourlyTemp.roundToLong()
-                        val hourlyWeather = weatherResponse.hourly[i].weather[0].main
-                        val hIcon = weatherResponse.hourly[i].weather[0].icon
-                        val hourlyIconUrl1 = "http://openweathermap.org/img/w/$hIcon.png"
-                        val lHourlyPop = weatherResponse.hourly[i].pop
-                        val hourlyPop = lHourlyPop.roundToLong().toString() + "%"
 
-                   //     Picasso.get().load(hourlyIconUrl1).into(binding.hourlyWeatherIcon1)
+                    val hourlyTime1 = (weatherResponse.hourly[1].dt).toString()
+                    val lUnixTime1 = unixTimeChange(hourlyTime1)
+                    val hourlyUnixTime1 = lUnixTime1.substring(11 until 16)
+                    binding.hourlyTime1.text = hourlyUnixTime1
 
-                        stringBuilder2 += "$hourlyUnixTime     $hourlyWeather     $hourlyTemp°     $hourlyPop \n\n"
+                    val hourlyTime2 = (weatherResponse.hourly[2].dt).toString()
+                    val lUnixTime2 = unixTimeChange(hourlyTime2)
+                    val hourlyUnixTime2 = lUnixTime2.substring(11 until 16)
+                    binding.hourlyTime2.text = hourlyUnixTime2
+
+                    val hourlyTime3 = (weatherResponse.hourly[3].dt).toString()
+                    val lUnixTime3 = unixTimeChange(hourlyTime3)
+                    val hourlyUnixTime3 = lUnixTime3.substring(11 until 16)
+                    binding.hourlyTime3.text = hourlyUnixTime3
+
+                    val hourlyTime4 = (weatherResponse.hourly[4].dt).toString()
+                    val lUnixTime4 = unixTimeChange(hourlyTime4)
+                    val hourlyUnixTime4 = lUnixTime4.substring(11 until 16)
+                    binding.hourlyTime4.text = hourlyUnixTime4
+
+                    val hourlyTime5 = (weatherResponse.hourly[5].dt).toString()
+                    val lUnixTime5 = unixTimeChange(hourlyTime5)
+                    val hourlyUnixTime5 = lUnixTime5.substring(11 until 16)
+                    binding.hourlyTime5.text = hourlyUnixTime5
+
+                    val hourlyTime6 = (weatherResponse.hourly[6].dt).toString()
+                    val lUnixTime6 = unixTimeChange(hourlyTime6)
+                    val hourlyUnixTime6 = lUnixTime6.substring(11 until 16)
+                    binding.hourlyTime6.text = hourlyUnixTime6
+
+                    val hourlyTime7 = (weatherResponse.hourly[7].dt).toString()
+                    val lUnixTime7 = unixTimeChange(hourlyTime7)
+                    val hourlyUnixTime7 = lUnixTime7.substring(11 until 16)
+                    binding.hourlyTime7.text = hourlyUnixTime7
+
+                    val hourlyTime8 = (weatherResponse.hourly[8].dt).toString()
+                    val lUnixTime8 = unixTimeChange(hourlyTime8)
+                    val hourlyUnixTime8 = lUnixTime8.substring(11 until 16)
+                    binding.hourlyTime8.text = hourlyUnixTime8
+
+                    val hourlyTime9 = (weatherResponse.hourly[9].dt).toString()
+                    val lUnixTime9 = unixTimeChange(hourlyTime9)
+                    val hourlyUnixTime9 = lUnixTime9.substring(11 until 16)
+                    binding.hourlyTime9.text = hourlyUnixTime9
+
+                    val hourlyTime10 = (weatherResponse.hourly[10].dt).toString()
+                    val lUnixTime10 = unixTimeChange(hourlyTime10)
+                    val hourlyUnixTime10 = lUnixTime10.substring(11 until 16)
+                    binding.hourlyTime10.text = hourlyUnixTime10
+
+                    val hourlyTime11 = (weatherResponse.hourly[11].dt).toString()
+                    val lUnixTime11 = unixTimeChange(hourlyTime11)
+                    val hourlyUnixTime11 = lUnixTime11.substring(11 until 16)
+                    binding.hourlyTime11.text = hourlyUnixTime11
+
+                    val hourlyTime12 = (weatherResponse.hourly[12].dt).toString()
+                    val lUnixTime12 = unixTimeChange(hourlyTime12)
+                    val hourlyUnixTime12 = lUnixTime12.substring(11 until 16)
+                    binding.hourlyTime12.text = hourlyUnixTime12
+
+                    val hourlyTime13 = (weatherResponse.hourly[13].dt).toString()
+                    val lUnixTime13 = unixTimeChange(hourlyTime13)
+                    val hourlyUnixTime13 = lUnixTime13.substring(11 until 16)
+                    binding.hourlyTime13.text = hourlyUnixTime13
+
+                    //------------------------------------------------
+
+                    val lHourlyTemp1 = weatherResponse.hourly[1].temp - 273.15
+                    val hourlyTemp1 = lHourlyTemp1.roundToLong().toString() + "°"
+                    binding.hourlyTemp1.text = hourlyTemp1
+
+                    val lHourlyTemp2 = weatherResponse.hourly[2].temp - 273.15
+                    val hourlyTemp2 = lHourlyTemp2.roundToLong().toString()+ "°"
+                    binding.hourlyTemp2.text = hourlyTemp2
+
+                    val lHourlyTemp3 = weatherResponse.hourly[3].temp - 273.15
+                    val hourlyTemp3 = lHourlyTemp3.roundToLong().toString()+ "°"
+                    binding.hourlyTemp3.text = hourlyTemp3
+
+                    val lHourlyTemp4 = weatherResponse.hourly[4].temp - 273.15
+                    val hourlyTemp4 = lHourlyTemp4.roundToLong().toString()+ "°"
+                    binding.hourlyTemp4.text = hourlyTemp4
+
+                    val lHourlyTemp5 = weatherResponse.hourly[5].temp - 273.15
+                    val hourlyTemp5 = lHourlyTemp5.roundToLong().toString()+ "°"
+                    binding.hourlyTemp5.text = hourlyTemp5
+
+                    val lHourlyTemp6 = weatherResponse.hourly[6].temp - 273.15
+                    val hourlyTemp6 = lHourlyTemp6.roundToLong().toString()+ "°"
+                    binding.hourlyTemp6.text = hourlyTemp6
+
+                    val lHourlyTemp7 = weatherResponse.hourly[7].temp - 273.15
+                    val hourlyTemp7 = lHourlyTemp7.roundToLong().toString()+ "°"
+                    binding.hourlyTemp7.text = hourlyTemp7
+
+                    val lHourlyTemp8 = weatherResponse.hourly[8].temp - 273.15
+                    val hourlyTemp8 = lHourlyTemp8.roundToLong().toString()+ "°"
+                    binding.hourlyTemp8.text = hourlyTemp8
+
+                    val lHourlyTemp9 = weatherResponse.hourly[9].temp - 273.15
+                    val hourlyTemp9 = lHourlyTemp9.roundToLong().toString()+ "°"
+                    binding.hourlyTemp9.text = hourlyTemp9
+
+                    val lHourlyTemp10 = weatherResponse.hourly[10].temp - 273.15
+                    val hourlyTemp10 = lHourlyTemp10.roundToLong().toString()+ "°"
+                    binding.hourlyTemp10.text = hourlyTemp10
+
+                    val lHourlyTemp11 = weatherResponse.hourly[11].temp - 273.15
+                    val hourlyTemp11 = lHourlyTemp11.roundToLong().toString()+ "°"
+                    binding.hourlyTemp11.text = hourlyTemp11
+
+                    val lHourlyTemp12 = weatherResponse.hourly[12].temp - 273.15
+                    val hourlyTemp12 = lHourlyTemp12.roundToLong().toString()+ "°"
+                    binding.hourlyTemp12.text = hourlyTemp12
+
+                    val lHourlyTemp13 = weatherResponse.hourly[13].temp - 273.15
+                    val hourlyTemp13 = lHourlyTemp13.roundToLong().toString() + "°"
+                    binding.hourlyTemp13.text = hourlyTemp13
+
+                    //------------------------------------------------
+
+                    val lHourlyPop1 = weatherResponse.hourly[1].pop
+                    val hourlyPop1 = lHourlyPop1.roundToLong().toString() + "%"
+                    binding.hourlyPop1.text = hourlyPop1
+
+                    val lHourlyPop2 = weatherResponse.hourly[2].pop
+                    val hourlyPop2 = lHourlyPop2.roundToLong().toString() + "%"
+                    binding.hourlyPop2.text = hourlyPop2
+
+                    val lHourlyPop3 = weatherResponse.hourly[3].pop
+                    val hourlyPop3 = lHourlyPop3.roundToLong().toString() + "%"
+                    binding.hourlyPop3.text = hourlyPop3
+
+                    val lHourlyPop4 = weatherResponse.hourly[4].pop
+                    val hourlyPop4 = lHourlyPop4.roundToLong().toString() + "%"
+                    binding.hourlyPop4.text = hourlyPop4
+
+                    val lHourlyPop5 = weatherResponse.hourly[5].pop
+                    val hourlyPop5 = lHourlyPop5.roundToLong().toString() + "%"
+                    binding.hourlyPop5.text = hourlyPop5
+
+                    val lHourlyPop6 = weatherResponse.hourly[6].pop
+                    val hourlyPop6 = lHourlyPop6.roundToLong().toString() + "%"
+                    binding.hourlyPop6.text = hourlyPop6
+
+                    val lHourlyPop7 = weatherResponse.hourly[7].pop
+                    val hourlyPop7 = lHourlyPop7.roundToLong().toString() + "%"
+                    binding.hourlyPop7.text = hourlyPop7
+
+                    val lHourlyPop8 = weatherResponse.hourly[8].pop
+                    val hourlyPop8 = lHourlyPop8.roundToLong().toString() + "%"
+                    binding.hourlyPop8.text = hourlyPop8
+
+                    val lHourlyPop9 = weatherResponse.hourly[9].pop
+                    val hourlyPop9 = lHourlyPop9.roundToLong().toString() + "%"
+                    binding.hourlyPop9.text = hourlyPop9
+
+                    val lHourlyPop10 = weatherResponse.hourly[10].pop
+                    val hourlyPop10 = lHourlyPop10.roundToLong().toString() + "%"
+                    binding.hourlyPop10.text = hourlyPop10
+
+                    val lHourlyPop11 = weatherResponse.hourly[11].pop
+                    val hourlyPop11 = lHourlyPop11.roundToLong().toString() + "%"
+                    binding.hourlyPop11.text = hourlyPop11
+
+                    val lHourlyPop12 = weatherResponse.hourly[12].pop
+                    val hourlyPop12 = lHourlyPop12.roundToLong().toString() + "%"
+                    binding.hourlyPop12.text = hourlyPop12
+
+                    val lHourlyPop13 = weatherResponse.hourly[13].pop
+                    val hourlyPop13 = lHourlyPop13.roundToLong().toString() + "%"
+                    binding.hourlyPop13.text = hourlyPop13
+
+                    //------------------------------------------------
 
 
-                    }
+                    val hIcon1 = weatherResponse.hourly[1].weather[0].icon
+                    val hourlyIconUrl1 = "http://openweathermap.org/img/w/$hIcon1.png"
+                    Picasso.get().load(hourlyIconUrl1).into(binding.hourlyWeatherIcon1)
 
-                    binding.hourlyWeatherText.text = stringBuilder2
+                    val hIcon2 = weatherResponse.hourly[2].weather[0].icon
+                    val hourlyIconUrl2 = "http://openweathermap.org/img/w/$hIcon2.png"
+                    Picasso.get().load(hourlyIconUrl2).into(binding.hourlyWeatherIcon2)
+
+                    val hIcon3 = weatherResponse.hourly[3].weather[0].icon
+                    val hourlyIconUrl3 = "http://openweathermap.org/img/w/$hIcon3.png"
+                    Picasso.get().load(hourlyIconUrl3).into(binding.hourlyWeatherIcon3)
+
+                    val hIcon4 = weatherResponse.hourly[4].weather[0].icon
+                    val hourlyIconUrl4 = "http://openweathermap.org/img/w/$hIcon4.png"
+                    Picasso.get().load(hourlyIconUrl4).into(binding.hourlyWeatherIcon4)
+
+                    val hIcon5 = weatherResponse.hourly[5].weather[0].icon
+                    val hourlyIconUrl5 = "http://openweathermap.org/img/w/$hIcon5.png"
+                    Picasso.get().load(hourlyIconUrl5).into(binding.hourlyWeatherIcon5)
+
+                    val hIcon6 = weatherResponse.hourly[6].weather[0].icon
+                    val hourlyIconUrl6 = "http://openweathermap.org/img/w/$hIcon6.png"
+                    Picasso.get().load(hourlyIconUrl6).into(binding.hourlyWeatherIcon6)
+
+                    val hIcon7 = weatherResponse.hourly[7].weather[0].icon
+                    val hourlyIconUrl7 = "http://openweathermap.org/img/w/$hIcon7.png"
+                    Picasso.get().load(hourlyIconUrl7).into(binding.hourlyWeatherIcon7)
+
+                    val hIcon8 = weatherResponse.hourly[8].weather[0].icon
+                    val hourlyIconUrl8 = "http://openweathermap.org/img/w/$hIcon8.png"
+                    Picasso.get().load(hourlyIconUrl8).into(binding.hourlyWeatherIcon8)
+
+                    val hIcon9 = weatherResponse.hourly[9].weather[0].icon
+                    val hourlyIconUrl9 = "http://openweathermap.org/img/w/$hIcon9.png"
+                    Picasso.get().load(hourlyIconUrl9).into(binding.hourlyWeatherIcon9)
+
+                    val hIcon10 = weatherResponse.hourly[10].weather[0].icon
+                    val hourlyIconUrl10 = "http://openweathermap.org/img/w/$hIcon10.png"
+                    Picasso.get().load(hourlyIconUrl10).into(binding.hourlyWeatherIcon10)
+
+                    val hIcon11 = weatherResponse.hourly[11].weather[0].icon
+                    val hourlyIconUrl11 = "http://openweathermap.org/img/w/$hIcon11.png"
+                    Picasso.get().load(hourlyIconUrl11).into(binding.hourlyWeatherIcon11)
+
+                    val hIcon12 = weatherResponse.hourly[12].weather[0].icon
+                    val hourlyIconUrl12 = "http://openweathermap.org/img/w/$hIcon12.png"
+                    Picasso.get().load(hourlyIconUrl12).into(binding.hourlyWeatherIcon12)
+
+                    val hIcon13 = weatherResponse.hourly[13].weather[0].icon
+                    val hourlyIconUrl13 = "http://openweathermap.org/img/w/$hIcon13.png"
+                    Picasso.get().load(hourlyIconUrl13).into(binding.hourlyWeatherIcon13)
+
+
+
+
+
+
+
+
+
+
+
+
 
                 }
 
