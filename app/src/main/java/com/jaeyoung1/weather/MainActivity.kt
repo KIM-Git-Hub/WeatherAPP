@@ -8,14 +8,12 @@ import android.location.Geocoder
 import android.location.LocationListener
 import android.location.Location
 import android.location.LocationManager
-import android.opengl.Visibility
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -56,7 +54,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
         private const val appId = "01cbde2e5ca2f0fea3d136fe95ce3aa0"
     }
 
-    var stringBuilder = ""
 
     private lateinit var locationManager: LocationManager
     private val requestPermissionLauncher = registerForActivityResult(
@@ -210,29 +207,118 @@ class MainActivity : AppCompatActivity(), LocationListener {
                 if (response.code() == 200) {
                     val weatherResponse = response.body()
 
-                    for (i in 1..7) {
+
+                    val dIcon1 = weatherResponse!!.daily[1].weather[0].icon
+                    val dailyIconUrl1 = "http://openweathermap.org/img/w/$dIcon1.png"
+                    Picasso.get().load(dailyIconUrl1).into(binding.dailyWeatherIcon1)
+
+                    val dIcon2 = weatherResponse.daily[2].weather[0].icon
+                    val dailyIconUrl2 = "http://openweathermap.org/img/w/$dIcon2.png"
+                    Picasso.get().load(dailyIconUrl2).into(binding.dailyWeatherIcon2)
+
+                    val dIcon3 = weatherResponse.daily[3].weather[0].icon
+                    val dailyIconUrl3 = "http://openweathermap.org/img/w/$dIcon3.png"
+                    Picasso.get().load(dailyIconUrl3).into(binding.dailyWeatherIcon3)
+
+                    val dIcon4 = weatherResponse.daily[4].weather[0].icon
+                    val dailyIconUrl4 = "http://openweathermap.org/img/w/$dIcon4.png"
+                    Picasso.get().load(dailyIconUrl4).into(binding.dailyWeatherIcon4)
+
+                    val dIcon5 = weatherResponse.daily[5].weather[0].icon
+                    val dailyIconUrl5 = "http://openweathermap.org/img/w/$dIcon5.png"
+                    Picasso.get().load(dailyIconUrl5).into(binding.dailyWeatherIcon5)
+
+                    val dIcon6 = weatherResponse.daily[6].weather[0].icon
+                    val dailyIconUrl6 = "http://openweathermap.org/img/w/$dIcon6.png"
+                    Picasso.get().load(dailyIconUrl6).into(binding.dailyWeatherIcon6)
+
+                    val dIcon7 = weatherResponse.daily[7].weather[0].icon
+                    val dailyIconUrl7 = "http://openweathermap.org/img/w/$dIcon7.png"
+                    Picasso.get().load(dailyIconUrl7).into(binding.dailyWeatherIcon7)
 
 
-                        val dailyTime = (weatherResponse!!.daily[i].dt).toString()
-                        val unixTime = unixTimeChange(dailyTime)
-                        val dailyUnixTime = unixTime.substring(0 until 11)
-                        val dIcon = weatherResponse.daily[i].weather[0].icon
-                        val dailyIconUrl = "http://openweathermap.org/img/w/$dIcon.png"
-                        Picasso.get().load(dailyIconUrl).into(binding.dailyWeatherIcon1)
+                    //-----------------------------------------------
 
-                    }
-
-                    val lMinTemp1 = weatherResponse!!.daily[1].temp!!.min - 273.15
+                    val lMinTemp1 = weatherResponse.daily[1].temp!!.min - 273.15
                     val minTemp1 = lMinTemp1.roundToLong().toString() + "°"
                     binding.dailyMinTemp1.text = minTemp1
                     val lMaxTemp1 = weatherResponse.daily[1].temp!!.max - 273.15
                     val maxTemp1 = lMaxTemp1.roundToLong().toString() + "°"
                     binding.dailyMaxTemp1.text = maxTemp1
 
+                    val lMinTemp2 = weatherResponse.daily[2].temp!!.min - 273.15
+                    val minTemp2 = lMinTemp2.roundToLong().toString() + "°"
+                    binding.dailyMinTemp2.text = minTemp2
+                    val lMaxTemp2 = weatherResponse.daily[2].temp!!.max - 273.15
+                    val maxTemp2 = lMaxTemp2.roundToLong().toString() + "°"
+                    binding.dailyMaxTemp2.text = maxTemp2
+
+                    val lMinTemp3 = weatherResponse.daily[3].temp!!.min - 273.15
+                    val minTemp3 = lMinTemp3.roundToLong().toString() + "°"
+                    binding.dailyMinTemp3.text = minTemp3
+                    val lMaxTemp3 = weatherResponse.daily[3].temp!!.max - 273.15
+                    val maxTemp3 = lMaxTemp3.roundToLong().toString() + "°"
+                    binding.dailyMaxTemp3.text = maxTemp3
+
+                    val lMinTemp4 = weatherResponse.daily[4].temp!!.min - 273.15
+                    val minTemp4 = lMinTemp4.roundToLong().toString() + "°"
+                    binding.dailyMinTemp4.text = minTemp4
+                    val lMaxTemp4 = weatherResponse.daily[4].temp!!.max - 273.15
+                    val maxTemp4 = lMaxTemp4.roundToLong().toString() + "°"
+                    binding.dailyMaxTemp4.text = maxTemp4
+
+                    val lMinTemp5 = weatherResponse.daily[5].temp!!.min - 273.15
+                    val minTemp5 = lMinTemp5.roundToLong().toString() + "°"
+                    binding.dailyMinTemp5.text = minTemp5
+                    val lMaxTemp5 = weatherResponse.daily[5].temp!!.max - 273.15
+                    val maxTemp5 = lMaxTemp5.roundToLong().toString() + "°"
+                    binding.dailyMaxTemp5.text = maxTemp5
+
+                    val lMinTemp6 = weatherResponse.daily[6].temp!!.min - 273.15
+                    val minTemp6 = lMinTemp6.roundToLong().toString() + "°"
+                    binding.dailyMinTemp6.text = minTemp6
+                    val lMaxTemp6 = weatherResponse.daily[6].temp!!.max - 273.15
+                    val maxTemp6 = lMaxTemp6.roundToLong().toString() + "°"
+                    binding.dailyMaxTemp6.text = maxTemp6
+
+                    val lMinTemp7 = weatherResponse.daily[7].temp!!.min - 273.15
+                    val minTemp7 = lMinTemp7.roundToLong().toString() + "°"
+                    binding.dailyMinTemp7.text = minTemp7
+                    val lMaxTemp7 = weatherResponse.daily[7].temp!!.max - 273.15
+                    val maxTemp7 = lMaxTemp7.roundToLong().toString() + "°"
+                    binding.dailyMaxTemp7.text = maxTemp7
+
+
+                    //------------------------------------------------
 
                     val lDailyPop1 = (weatherResponse.daily[1].pop) * 100
                     val dailyPop1 = lDailyPop1.roundToLong().toString() + "%"
                     binding.dailyPop1.text = dailyPop1
+
+                    val lDailyPop2 = (weatherResponse.daily[2].pop) * 100
+                    val dailyPop2 = lDailyPop2.roundToLong().toString() + "%"
+                    binding.dailyPop2.text = dailyPop2
+
+                    val lDailyPop3 = (weatherResponse.daily[3].pop) * 100
+                    val dailyPop3 = lDailyPop3.roundToLong().toString() + "%"
+                    binding.dailyPop3.text = dailyPop3
+
+                    val lDailyPop4 = (weatherResponse.daily[4].pop) * 100
+                    val dailyPop4 = lDailyPop4.roundToLong().toString() + "%"
+                    binding.dailyPop4.text = dailyPop4
+
+                    val lDailyPop5 = (weatherResponse.daily[5].pop) * 100
+                    val dailyPop5 = lDailyPop5.roundToLong().toString() + "%"
+                    binding.dailyPop5.text = dailyPop5
+
+                    val lDailyPop6 = (weatherResponse.daily[6].pop) * 100
+                    val dailyPop6 = lDailyPop6.roundToLong().toString() + "%"
+                    binding.dailyPop6.text = dailyPop6
+
+                    val lDailyPop7 = (weatherResponse.daily[7].pop) * 100
+                    val dailyPop7 = lDailyPop7.roundToLong().toString() + "%"
+                    binding.dailyPop7.text = dailyPop7
+
 
                     //------------------------------------------------
 
@@ -240,7 +326,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     val day = calendar.get(Calendar.DAY_OF_WEEK)
 
                     var dayPlus1 = day + 1
-                    if (dayPlus1 > 7) {
+                    if (dayPlus1 >= 8) {
                         dayPlus1 = 1
                     }
 
@@ -254,6 +340,89 @@ class MainActivity : AppCompatActivity(), LocationListener {
                         Calendar.SATURDAY -> binding.dayOfWeek1.text = "土曜日"
                     }
 
+                    var dayPlus2 = day + 2
+                    if (dayPlus2 >= 8) {
+                        dayPlus2 = day - 5
+                    }
+
+                    when (dayPlus2) {
+                        Calendar.SUNDAY -> binding.dayOfWeek2.text = "日曜日"
+                        Calendar.MONDAY -> binding.dayOfWeek2.text = "月曜日"
+                        Calendar.TUESDAY -> binding.dayOfWeek2.text = "火曜日"
+                        Calendar.WEDNESDAY -> binding.dayOfWeek2.text = "水曜日"
+                        Calendar.THURSDAY -> binding.dayOfWeek2.text = "木曜日"
+                        Calendar.FRIDAY -> binding.dayOfWeek2.text = "金曜日"
+                        Calendar.SATURDAY -> binding.dayOfWeek2.text = "土曜日"
+                    }
+
+                    var dayPlus3 = day + 3
+                    if (dayPlus3 >= 8) {
+                        dayPlus3 = day - 4
+                    }
+
+                    when (dayPlus3) {
+                        Calendar.SUNDAY -> binding.dayOfWeek3.text = "日曜日"
+                        Calendar.MONDAY -> binding.dayOfWeek3.text = "月曜日"
+                        Calendar.TUESDAY -> binding.dayOfWeek3.text = "火曜日"
+                        Calendar.WEDNESDAY -> binding.dayOfWeek3.text = "水曜日"
+                        Calendar.THURSDAY -> binding.dayOfWeek3.text = "木曜日"
+                        Calendar.FRIDAY -> binding.dayOfWeek3.text = "金曜日"
+                        Calendar.SATURDAY -> binding.dayOfWeek3.text = "土曜日"
+                    }
+
+                    var dayPlus4 = day + 4
+                    if (dayPlus4 >= 8) {
+                        dayPlus4 = day - 3
+                    }
+
+                    when (dayPlus4) {
+                        Calendar.SUNDAY -> binding.dayOfWeek4.text = "日曜日"
+                        Calendar.MONDAY -> binding.dayOfWeek4.text = "月曜日"
+                        Calendar.TUESDAY -> binding.dayOfWeek4.text = "火曜日"
+                        Calendar.WEDNESDAY -> binding.dayOfWeek4.text = "水曜日"
+                        Calendar.THURSDAY -> binding.dayOfWeek4.text = "木曜日"
+                        Calendar.FRIDAY -> binding.dayOfWeek4.text = "金曜日"
+                        Calendar.SATURDAY -> binding.dayOfWeek4.text = "土曜日"
+                    }
+
+                    var dayPlus5 = day + 5
+                    if (dayPlus5 >= 8) {
+                        dayPlus5 = day - 2
+                    }
+
+                    when (dayPlus5) {
+                        Calendar.SUNDAY -> binding.dayOfWeek5.text = "日曜日"
+                        Calendar.MONDAY -> binding.dayOfWeek5.text = "月曜日"
+                        Calendar.TUESDAY -> binding.dayOfWeek5.text = "火曜日"
+                        Calendar.WEDNESDAY -> binding.dayOfWeek5.text = "水曜日"
+                        Calendar.THURSDAY -> binding.dayOfWeek5.text = "木曜日"
+                        Calendar.FRIDAY -> binding.dayOfWeek5.text = "金曜日"
+                        Calendar.SATURDAY -> binding.dayOfWeek5.text = "土曜日"
+                    }
+                    var dayPlus6 = day + 6
+                    if (dayPlus6 >= 8) {
+                        dayPlus6 = day - 1
+                    }
+
+                    when (dayPlus6) {
+                        Calendar.SUNDAY -> binding.dayOfWeek6.text = "日曜日"
+                        Calendar.MONDAY -> binding.dayOfWeek6.text = "月曜日"
+                        Calendar.TUESDAY -> binding.dayOfWeek6.text = "火曜日"
+                        Calendar.WEDNESDAY -> binding.dayOfWeek6.text = "水曜日"
+                        Calendar.THURSDAY -> binding.dayOfWeek6.text = "木曜日"
+                        Calendar.FRIDAY -> binding.dayOfWeek6.text = "金曜日"
+                        Calendar.SATURDAY -> binding.dayOfWeek6.text = "土曜日"
+                    }
+
+                    when (day) {
+                        Calendar.SUNDAY -> binding.dayOfWeek7.text = "日曜日"
+                        Calendar.MONDAY -> binding.dayOfWeek7.text = "月曜日"
+                        Calendar.TUESDAY -> binding.dayOfWeek7.text = "火曜日"
+                        Calendar.WEDNESDAY -> binding.dayOfWeek7.text = "水曜日"
+                        Calendar.THURSDAY -> binding.dayOfWeek7.text = "木曜日"
+                        Calendar.FRIDAY -> binding.dayOfWeek7.text = "金曜日"
+                        Calendar.SATURDAY -> binding.dayOfWeek7.text = "土曜日"
+                    }
 
 
                     //------------------------------------------------
@@ -631,6 +800,10 @@ class MainActivity : AppCompatActivity(), LocationListener {
             .check()
 
     }
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding = null
+    }
 
 
 }
@@ -688,8 +861,6 @@ class Daily {
     @SerializedName("pop")
     var pop: Float = 0.toFloat()
 
-    @SerializedName("dt")
-    var dt: Int = 0
 }
 
 class DailyWeather {
@@ -725,14 +896,10 @@ class Hourly {
 }
 
 class HourlyWeather {
-    @SerializedName("description")
-    var description: String? = null
 
     @SerializedName("icon")
     var icon: String? = null
 
-    @SerializedName("main")
-    var main: String? = null
 }
 
 
@@ -754,14 +921,6 @@ class CurrentWeatherResponse {
 }
 
 class Weather {
-    @SerializedName("id")
-    var id: Int = 0
-
-    @SerializedName("main")
-    var main: String? = null
-
-    @SerializedName("description")
-    var description: String? = null
 
     @SerializedName("icon")
     var icon: String? = null

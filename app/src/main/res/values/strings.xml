@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">weather</string>
+    <string name="sunriseSunset">日の出/日の入り</string>
+    <string name="windSpeed">風速</string>
+    <string name="weatherIcon">weatherIcon</string>
+    <string name="popImage">popImage</string>
 </resources>

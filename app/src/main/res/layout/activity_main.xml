@@ -27,6 +27,11 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"/>
 
             <TextView
                 android:id="@+id/currentTemp"
@@ -36,14 +41,6 @@
                 android:layout_marginTop="40dp"
                 android:textSize="30sp"
                 android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp" />
-
 
             <TextView
                 android:id="@+id/feelsLike"
@@ -60,15 +57,11 @@
 
             <TextView
                 android:id="@+id/currentPop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
                 android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/humidity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp" />
+
 
 
         </LinearLayout>
@@ -143,40 +136,19 @@
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/d50" />
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="日の出・日の入り"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/sunriseSunset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="風速"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/windSpeedDeg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="15sp" />
-
         </LinearLayout>
     </LinearLayout>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
 
 
     <androidx.cardview.widget.CardView
@@ -194,7 +166,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -222,7 +194,8 @@
                             android:id="@+id/hourlyWeatherIcon1"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp1"
@@ -231,25 +204,14 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop1"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
+                            app:drawableStartCompat="@drawable/water_drop" />
 
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -270,7 +232,8 @@
                             android:id="@+id/hourlyWeatherIcon2"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp2"
@@ -279,25 +242,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop2"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
+                            app:drawableStartCompat="@drawable/water_drop" />
 
                     </LinearLayout>
 
@@ -318,7 +269,8 @@
                             android:id="@+id/hourlyWeatherIcon3"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp3"
@@ -327,26 +279,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop3"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
-
+                            app:drawableStartCompat="@drawable/water_drop" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -366,7 +305,8 @@
                             android:id="@+id/hourlyWeatherIcon4"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp4"
@@ -375,25 +315,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop4"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
+                            app:drawableStartCompat="@drawable/water_drop" />
 
                     </LinearLayout>
 
@@ -414,7 +342,8 @@
                             android:id="@+id/hourlyWeatherIcon5"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp5"
@@ -423,25 +352,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop5"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop5"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
+                            app:drawableStartCompat="@drawable/water_drop" />
 
                     </LinearLayout>
 
@@ -462,7 +379,8 @@
                             android:id="@+id/hourlyWeatherIcon6"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp6"
@@ -471,25 +389,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop6"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop6"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
+                            app:drawableStartCompat="@drawable/water_drop" />
 
                     </LinearLayout>
 
@@ -510,7 +416,8 @@
                             android:id="@+id/hourlyWeatherIcon7"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp7"
@@ -519,25 +426,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop7"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop7"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
+                            app:drawableStartCompat="@drawable/water_drop" />
 
                     </LinearLayout>
 
@@ -558,7 +453,8 @@
                             android:id="@+id/hourlyWeatherIcon8"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp8"
@@ -567,25 +463,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop8"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop8"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
+                            app:drawableStartCompat="@drawable/water_drop" />
 
 
                     </LinearLayout>
@@ -607,7 +491,8 @@
                             android:id="@+id/hourlyWeatherIcon9"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp9"
@@ -616,25 +501,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop9"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop9"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
+                            app:drawableStartCompat="@drawable/water_drop" />
 
                     </LinearLayout>
 
@@ -649,13 +522,15 @@
                             android:id="@+id/hourlyTime10"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:contentDescription="@string/weatherIcon"
                             android:gravity="center" />
 
                         <ImageView
                             android:id="@+id/hourlyWeatherIcon10"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp10"
@@ -664,26 +539,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop10"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop10"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
-
+                            app:drawableStartCompat="@drawable/water_drop" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -703,7 +565,8 @@
                             android:id="@+id/hourlyWeatherIcon11"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp11"
@@ -712,25 +575,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop11"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop11"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
+                            app:drawableStartCompat="@drawable/water_drop" />
 
                     </LinearLayout>
 
@@ -751,7 +602,8 @@
                             android:id="@+id/hourlyWeatherIcon12"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp12"
@@ -760,26 +612,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop12"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop12"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
-
+                            app:drawableStartCompat="@drawable/water_drop" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -799,7 +638,8 @@
                             android:id="@+id/hourlyWeatherIcon13"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/weatherIcon" />
 
                         <TextView
                             android:id="@+id/hourlyTemp13"
@@ -808,25 +648,13 @@
                             android:layout_marginTop="10dp"
                             android:gravity="center" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:id="@+id/hourlyPop13"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
+                            android:contentDescription="@string/popImage"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/hourlyPop13"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center" />
-
-                        </LinearLayout>
+                            app:drawableStartCompat="@drawable/water_drop" />
 
                     </LinearLayout>
 
@@ -839,18 +667,15 @@
 
     </androidx.cardview.widget.CardView>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5">
 
         <LinearLayout
 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_height="0dp"
+            android:layout_weight="5"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
+            android:gravity="center"
             android:orientation="vertical">
 
             <LinearLayout
@@ -860,9 +685,9 @@
 
                 <TextView
                     android:id="@+id/dayOfWeek1"
-                    android:layout_gravity="start|center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -872,30 +697,43 @@
                     android:gravity="end|center"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/water_drop" />
 
-                    <TextView
-                        android:layout_marginEnd="10dp"
-                        android:id="@+id/dailyPop1"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/dailyWeatherIcon1"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="10dp"/>
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:contentDescription="@string/popImage"
+                            android:src="@drawable/water_drop" />
+
+                        <TextView
+                            android:id="@+id/dailyPop1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp" />
+
+                        <ImageView
+                            android:id="@+id/dailyWeatherIcon1"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/weatherIcon" />
+
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/dailyMinTemp1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_marginEnd="5dp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/dailyMaxTemp1"
@@ -916,9 +754,9 @@
 
                 <TextView
                     android:id="@+id/dayOfWeek2"
-                    android:layout_gravity="start|center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -928,30 +766,43 @@
                     android:gravity="end|center"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/water_drop" />
 
-                    <TextView
-                        android:layout_marginEnd="10dp"
-                        android:id="@+id/dailyPop2"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/dailyWeatherIcon2"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="10dp"/>
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:contentDescription="@string/popImage"
+                            android:src="@drawable/water_drop" />
+
+                        <TextView
+                            android:id="@+id/dailyPop2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp" />
+
+                        <ImageView
+                            android:id="@+id/dailyWeatherIcon2"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/weatherIcon" />
+
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/dailyMinTemp2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_marginEnd="5dp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/dailyMaxTemp2"
@@ -972,9 +823,9 @@
 
                 <TextView
                     android:id="@+id/dayOfWeek3"
-                    android:layout_gravity="start|center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -984,30 +835,42 @@
                     android:gravity="end|center"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/water_drop" />
 
-                    <TextView
-                        android:layout_marginEnd="10dp"
-                        android:id="@+id/dailyPop3"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/dailyWeatherIcon3"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="10dp"/>
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:contentDescription="@string/popImage"
+                            android:src="@drawable/water_drop" />
+
+                        <TextView
+                            android:id="@+id/dailyPop3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp" />
+
+                        <ImageView
+                            android:id="@+id/dailyWeatherIcon3"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/weatherIcon" />
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/dailyMinTemp3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_marginEnd="5dp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/dailyMaxTemp3"
@@ -1020,18 +883,21 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
+
                 <TextView
                     android:id="@+id/dayOfWeek4"
-                    android:layout_gravity="start|center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1039,30 +905,43 @@
                     android:gravity="end|center"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/water_drop" />
 
-                    <TextView
-                        android:layout_marginEnd="10dp"
-                        android:id="@+id/dailyPop4"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/dailyWeatherIcon4"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="10dp"/>
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/popImage"
+                            android:src="@drawable/water_drop" />
+
+                        <TextView
+                            android:id="@+id/dailyPop4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp" />
+
+                        <ImageView
+                            android:id="@+id/dailyWeatherIcon4"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/weatherIcon" />
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/dailyMinTemp4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_marginEnd="5dp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/dailyMaxTemp4"
@@ -1075,6 +954,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1082,9 +962,9 @@
 
                 <TextView
                     android:id="@+id/dayOfWeek5"
-                    android:layout_gravity="start|center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -1094,30 +974,42 @@
                     android:gravity="end|center"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/water_drop" />
 
-                    <TextView
-                        android:layout_marginEnd="10dp"
-                        android:id="@+id/dailyPop5"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/dailyWeatherIcon5"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="10dp"/>
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:contentDescription="@string/popImage"
+                            android:src="@drawable/water_drop" />
+
+                        <TextView
+                            android:id="@+id/dailyPop5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp" />
+
+                        <ImageView
+                            android:id="@+id/dailyWeatherIcon5"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/weatherIcon" />
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/dailyMinTemp5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_marginEnd="5dp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/dailyMaxTemp5"
@@ -1130,6 +1022,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1137,9 +1030,9 @@
 
                 <TextView
                     android:id="@+id/dayOfWeek6"
-                    android:layout_gravity="start|center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -1149,30 +1042,42 @@
                     android:gravity="end|center"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/water_drop" />
-
-                    <TextView
-                        android:layout_marginEnd="10dp"
-                        android:id="@+id/dailyPop6"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/dailyWeatherIcon6"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="10dp"/>
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:contentDescription="@string/popImage"
+                            android:src="@drawable/water_drop" />
+
+                        <TextView
+                            android:id="@+id/dailyPop6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp" />
+
+                        <ImageView
+                            android:id="@+id/dailyWeatherIcon6"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/weatherIcon" />
+
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/dailyMinTemp6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_marginEnd="5dp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/dailyMaxTemp6"
@@ -1185,6 +1090,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1192,11 +1098,12 @@
 
                 <TextView
                     android:id="@+id/dayOfWeek7"
-                    android:layout_gravity="start|center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="start|center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1204,30 +1111,42 @@
                     android:gravity="end|center"
                     android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:src="@drawable/water_drop" />
-
-                    <TextView
-                        android:layout_marginEnd="10dp"
-                        android:id="@+id/dailyPop7"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/dailyWeatherIcon7"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginEnd="10dp"/>
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:contentDescription="@string/popImage"
+                            android:src="@drawable/water_drop" />
+
+                        <TextView
+                            android:id="@+id/dailyPop7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp" />
+
+                        <ImageView
+                            android:id="@+id/dailyWeatherIcon7"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginEnd="10dp"
+                            android:contentDescription="@string/weatherIcon" />
+
+                    </LinearLayout>
+
 
                     <TextView
                         android:id="@+id/dailyMinTemp7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:layout_marginEnd="5dp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/dailyMaxTemp7"
@@ -1244,7 +1163,45 @@
 
         </LinearLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/sunriseSunset"
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/sunriseSunset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/windSpeed"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/windSpeedDeg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp" />
+
+
+    </LinearLayout>
     </ScrollView>
 
 
