@@ -164,14 +164,16 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     val cTempString = "$cTemp°"
                     val feelsLikeString = "体感温度$feelsLike°"
                     val cMaxMinTempString = "$minTemp°/$maxTemp°"
-                    val sunriseSunsetString = "$sunrise/$sunset"
-                    val humidityString = "湿度$humidity%"
-                    val windSpeedDegString = "$windSpeed m/s, $windDeg"
+                    val sunriseString = sunrise.toString()
+                    val sunsetString = sunset.toString()
+                    val humidityString = "$humidity%"
+                    val windSpeedDegString = "$windSpeed m/s($windDeg)"
 
                     binding.currentTemp.text = cTempString
                     binding.feelsLike.text = feelsLikeString
                     binding.currentMaxMinTemp.text = cMaxMinTempString
-                    binding.sunriseSunset.text = sunriseSunsetString
+                    binding.sunrise.text = sunriseString
+                    binding.sunset.text = sunsetString
                     binding.humidity.text = humidityString
                     binding.windSpeedDeg.text = windSpeedDegString
 
@@ -428,7 +430,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     //------------------------------------------------
 
                     //currentPop
-                    val lcPop = (weatherResponse.daily[0].pop) * 100
+                    val lcPop = (weatherResponse.daily[0].pop)
                     val cPop = "降水確率" + lcPop.roundToLong().toString() + "%"
                     binding.currentPop.text = cPop
 
