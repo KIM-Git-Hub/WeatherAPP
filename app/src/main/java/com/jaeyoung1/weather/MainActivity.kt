@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
             // それでも拒否された時の対応
             val toast = Toast.makeText(
                 this,
-                "これ以上なにもできません", Toast.LENGTH_SHORT
+                "権限を拒否しました。", Toast.LENGTH_SHORT
             )
             toast.show()
 
@@ -719,7 +719,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
                 getWeather()
                 getDailyWeather()
-                Log.d("xx11", "11")
             }
         }
 
@@ -779,13 +778,13 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         val permissionListener: PermissionListener = object : PermissionListener {
             override fun onPermissionGranted() {
-                Toast.makeText(this@MainActivity, "권한 허가", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "権限許可", Toast.LENGTH_SHORT).show()
 
 
             }
 
             override fun onPermissionDenied(deniedPermissions: ArrayList<String?>) {
-                Toast.makeText(this@MainActivity, "권한 거부\n$deniedPermissions", Toast.LENGTH_SHORT)
+                Toast.makeText(this@MainActivity, "権限拒否", Toast.LENGTH_SHORT)
                     .show()
                 exitProcess(0)
             }
@@ -793,8 +792,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         TedPermission.with(this)
             .setPermissionListener(permissionListener)
-            .setRationaleMessage("구글 로그인을 하기 위해서는 권한이 필요해요")
-            .setDeniedMessage("[설정] > [권한] 에서 권한을 허용할 수 있어요.")
+            .setRationaleMessage("アプリケーションを使用するためには権限が必要です。")
+            .setDeniedMessage("[設定]->[権限] 権限を許可してください。")
             .setPermissions(
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION

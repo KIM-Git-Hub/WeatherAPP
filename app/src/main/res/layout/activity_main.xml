@@ -12,8 +12,9 @@
 
 
     <LinearLayout
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -26,15 +27,16 @@
 
             <TextView
                 android:id="@+id/address"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <TextView
@@ -42,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="10dp"
+
                     android:textSize="50sp"
                     android:textStyle="bold" />
 
@@ -53,17 +55,18 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/feelsLike"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp" />
-
-                    <TextView
                         android:id="@+id/currentMaxMinTemp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
                         android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/feelsLike"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp" />
+
 
                     <TextView
                         android:id="@+id/currentPop"
@@ -81,15 +84,14 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
             android:gravity="center"
+            android:layout_marginEnd="20dp"
             android:orientation="vertical">
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/clearSky"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -97,8 +99,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/fewClouds"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -106,8 +108,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/clouds"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -115,8 +117,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/rain"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -124,8 +126,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/thunder"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -133,8 +135,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/snow"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -142,8 +144,8 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/mist"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -201,8 +203,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime1"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon1"
@@ -215,15 +216,13 @@
                                     android:id="@+id/hourlyTemp1"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
 
 
@@ -239,8 +238,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime2"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon2"
@@ -253,15 +251,13 @@
                                     android:id="@+id/hourlyTemp2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop2"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
 
                             </LinearLayout>
@@ -276,8 +272,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime3"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon3"
@@ -290,15 +285,13 @@
                                     android:id="@+id/hourlyTemp3"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop3"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
                             </LinearLayout>
 
@@ -312,8 +305,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime4"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon4"
@@ -326,15 +318,13 @@
                                     android:id="@+id/hourlyTemp4"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop4"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
 
                             </LinearLayout>
@@ -349,8 +339,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime5"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon5"
@@ -363,15 +352,13 @@
                                     android:id="@+id/hourlyTemp5"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop5"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
 
                             </LinearLayout>
@@ -386,8 +373,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime6"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon6"
@@ -400,15 +386,13 @@
                                     android:id="@+id/hourlyTemp6"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop6"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
 
                             </LinearLayout>
@@ -423,8 +407,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime7"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon7"
@@ -437,15 +420,13 @@
                                     android:id="@+id/hourlyTemp7"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop7"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
 
                             </LinearLayout>
@@ -460,8 +441,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime8"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon8"
@@ -474,15 +454,13 @@
                                     android:id="@+id/hourlyTemp8"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop8"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
 
 
@@ -498,8 +476,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime9"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon9"
@@ -512,15 +489,13 @@
                                     android:id="@+id/hourlyTemp9"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop9"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
 
                             </LinearLayout>
@@ -536,8 +511,7 @@
                                     android:id="@+id/hourlyTime10"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:contentDescription="@string/weatherIcon"
-                                    android:gravity="center" />
+                                    android:contentDescription="@string/weatherIcon" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon10"
@@ -550,15 +524,13 @@
                                     android:id="@+id/hourlyTemp10"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop10"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
                             </LinearLayout>
 
@@ -572,8 +544,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime11"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon11"
@@ -586,15 +557,13 @@
                                     android:id="@+id/hourlyTemp11"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop11"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
 
                             </LinearLayout>
@@ -609,8 +578,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime12"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon12"
@@ -623,15 +591,13 @@
                                     android:id="@+id/hourlyTemp12"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop12"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
                             </LinearLayout>
 
@@ -645,8 +611,7 @@
                                 <TextView
                                     android:id="@+id/hourlyTime13"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center" />
+                                    android:layout_height="wrap_content" />
 
                                 <ImageView
                                     android:id="@+id/hourlyWeatherIcon13"
@@ -659,15 +624,13 @@
                                     android:id="@+id/hourlyTemp13"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:gravity="center" />
+                                    android:layout_marginTop="10dp" />
 
                                 <TextView
                                     android:id="@+id/hourlyPop13"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:contentDescription="@string/popImage"
-                                    android:gravity="center"
                                     app:drawableStartCompat="@drawable/water_drop" />
 
                             </LinearLayout>
@@ -1179,27 +1142,27 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/drawable"
                 android:gravity="center"
-                android:padding="20dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:padding="20dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:layout_marginEnd="50dp"
                     android:gravity="center"
-                    android:layout_marginEnd="50dp">
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/sunrise"
                         android:layout_marginBottom="5dp"
-                        android:contentDescription="@string/sunriseImage" />
+                        android:contentDescription="@string/sunriseImage"
+                        android:src="@drawable/sunrise" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -1225,9 +1188,9 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/sunset"
                         android:layout_marginBottom="5dp"
-                        android:contentDescription="@string/sunset" />
+                        android:contentDescription="@string/sunset"
+                        android:src="@drawable/sunset" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -1248,76 +1211,76 @@
             </LinearLayout>
 
 
-
-        <LinearLayout
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/drawable"
-            android:gravity="center"
-            android:padding="20dp"
-            android:orientation="horizontal">
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="50dp"
-                android:gravity="center">
+                android:layout_marginTop="10dp"
+                android:background="@drawable/drawable"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="20dp">
 
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/wind"
-                    android:layout_marginBottom="5dp"
-                    android:contentDescription="@string/windSpeedImage" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                <TextView
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:contentDescription="@string/windSpeedImage"
+                        android:src="@drawable/wind" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/windSpeed"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/windSpeedDeg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/windSpeed"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:id="@+id/windSpeedDeg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp" />
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="5dp"
+                        android:contentDescription="@string/humidityImage"
+                        android:src="@drawable/humidity" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/humidity"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/humidity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/humidity"
-                    android:layout_marginBottom="5dp"
-                    android:contentDescription="@string/humidityImage" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/humidity"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/humidity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
 
         </LinearLayout>
 
