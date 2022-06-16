@@ -8,8 +8,10 @@
         <entry key="app/src/main/res/drawable/drawble.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/glance_app_widget.xml" value="0.11666666666666667" />
         <entry key="app/src/main/res/layout/widget.xml" value="0.1" />
         <entry key="app/src/main/res/layout/widget_provider.xml" value="0.1" />
+        <entry key="app/src/main/res/xml/glance_appwidget_meta_data.xml" value="0.11666666666666667" />
         <entry key="app/src/main/res/xml/widget_provider.xml" value="0.1" />
       </map>
     </option>
