@@ -1,12 +1,16 @@
 package com.jaeyoung1.weather
 
 import android.Manifest
+import android.R
+import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
-import android.location.LocationListener
 import android.location.Location
+import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.provider.Settings
@@ -35,8 +39,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.roundToLong
 import kotlin.system.exitProcess
 
@@ -48,6 +53,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
 
     companion object {
+        var ss = "33"
         private var latitude: Double? = 0.0
         private var longitude: Double? = 0.0
         private const val baseURL = "http://api.openweathermap.org/"
@@ -80,6 +86,9 @@ class MainActivity : AppCompatActivity(), LocationListener {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val actionBar = supportActionBar
+        actionBar?.hide()
+
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -90,8 +99,16 @@ class MainActivity : AppCompatActivity(), LocationListener {
             locationStart()
         }
 
-        val actionBar = supportActionBar
-        actionBar?.hide()
+
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("HH:mm")
+        val formatted = current.format(formatter)
+        binding.time.text = formatted
+
+
+
+        ss = formatted.toString()
+
 
     }
 
@@ -163,7 +180,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
                     val cTempString = "$cTemp°"
                     val feelsLikeString = "体感温度$feelsLike°"
-                    val cMaxMinTempString = "$minTemp°/$maxTemp°"
+                    val cMaxMinTempString = "$maxTemp°/$minTemp°"
                     val sunriseString = sunrise.toString()
                     val sunsetString = sunset.toString()
                     val humidityString = "$humidity%"
@@ -194,6 +211,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         val services = retrofit.create(WeatherService::class.java)
         val call = services.getDailyWeatherData(latitude.toString(), longitude.toString(), appId)
+
 
         //enqueue 인터페이스로부터 함수를 호출할 수 있다.
         call.enqueue(object : Callback<DailyWeatherResponse> {
@@ -426,79 +444,60 @@ class MainActivity : AppCompatActivity(), LocationListener {
                         Calendar.SATURDAY -> binding.dayOfWeek7.text = "土曜日"
                     }
 
-
-                    //------------------------------------------------
-
-                    //currentPop
-                    val lcPop = (weatherResponse.daily[0].pop)
-                    val cPop = "降水確率" + lcPop.roundToLong().toString() + "%"
-                    binding.currentPop.text = cPop
-
                     //------------------------------------------------
 
                     val hourlyTime1 = (weatherResponse.hourly[1].dt).toString()
-                    val lUnixTime1 = unixTimeChange(hourlyTime1)
-                    val hourlyUnixTime1 = lUnixTime1.substring(11 until 16)
+                    val hourlyUnixTime1 = unixTimeChange(hourlyTime1)
                     binding.hourlyTime1.text = hourlyUnixTime1
 
                     val hourlyTime2 = (weatherResponse.hourly[2].dt).toString()
-                    val lUnixTime2 = unixTimeChange(hourlyTime2)
-                    val hourlyUnixTime2 = lUnixTime2.substring(11 until 16)
+                    val hourlyUnixTime2 = unixTimeChange(hourlyTime2)
                     binding.hourlyTime2.text = hourlyUnixTime2
 
+
                     val hourlyTime3 = (weatherResponse.hourly[3].dt).toString()
-                    val lUnixTime3 = unixTimeChange(hourlyTime3)
-                    val hourlyUnixTime3 = lUnixTime3.substring(11 until 16)
+                    val hourlyUnixTime3 = unixTimeChange(hourlyTime3)
                     binding.hourlyTime3.text = hourlyUnixTime3
 
                     val hourlyTime4 = (weatherResponse.hourly[4].dt).toString()
-                    val lUnixTime4 = unixTimeChange(hourlyTime4)
-                    val hourlyUnixTime4 = lUnixTime4.substring(11 until 16)
+                    val hourlyUnixTime4 = unixTimeChange(hourlyTime4)
                     binding.hourlyTime4.text = hourlyUnixTime4
 
                     val hourlyTime5 = (weatherResponse.hourly[5].dt).toString()
-                    val lUnixTime5 = unixTimeChange(hourlyTime5)
-                    val hourlyUnixTime5 = lUnixTime5.substring(11 until 16)
+                    val hourlyUnixTime5 = unixTimeChange(hourlyTime5)
                     binding.hourlyTime5.text = hourlyUnixTime5
 
                     val hourlyTime6 = (weatherResponse.hourly[6].dt).toString()
-                    val lUnixTime6 = unixTimeChange(hourlyTime6)
-                    val hourlyUnixTime6 = lUnixTime6.substring(11 until 16)
+                    val hourlyUnixTime6 = unixTimeChange(hourlyTime6)
                     binding.hourlyTime6.text = hourlyUnixTime6
 
                     val hourlyTime7 = (weatherResponse.hourly[7].dt).toString()
-                    val lUnixTime7 = unixTimeChange(hourlyTime7)
-                    val hourlyUnixTime7 = lUnixTime7.substring(11 until 16)
+                    val hourlyUnixTime7 = unixTimeChange(hourlyTime7)
                     binding.hourlyTime7.text = hourlyUnixTime7
 
                     val hourlyTime8 = (weatherResponse.hourly[8].dt).toString()
-                    val lUnixTime8 = unixTimeChange(hourlyTime8)
-                    val hourlyUnixTime8 = lUnixTime8.substring(11 until 16)
+                    val hourlyUnixTime8 = unixTimeChange(hourlyTime8)
                     binding.hourlyTime8.text = hourlyUnixTime8
 
                     val hourlyTime9 = (weatherResponse.hourly[9].dt).toString()
-                    val lUnixTime9 = unixTimeChange(hourlyTime9)
-                    val hourlyUnixTime9 = lUnixTime9.substring(11 until 16)
+                    val hourlyUnixTime9 = unixTimeChange(hourlyTime9)
                     binding.hourlyTime9.text = hourlyUnixTime9
 
                     val hourlyTime10 = (weatherResponse.hourly[10].dt).toString()
-                    val lUnixTime10 = unixTimeChange(hourlyTime10)
-                    val hourlyUnixTime10 = lUnixTime10.substring(11 until 16)
+                    val hourlyUnixTime10 = unixTimeChange(hourlyTime10)
                     binding.hourlyTime10.text = hourlyUnixTime10
 
                     val hourlyTime11 = (weatherResponse.hourly[11].dt).toString()
-                    val lUnixTime11 = unixTimeChange(hourlyTime11)
-                    val hourlyUnixTime11 = lUnixTime11.substring(11 until 16)
+                    val hourlyUnixTime11 = unixTimeChange(hourlyTime11)
                     binding.hourlyTime11.text = hourlyUnixTime11
 
                     val hourlyTime12 = (weatherResponse.hourly[12].dt).toString()
-                    val lUnixTime12 = unixTimeChange(hourlyTime12)
-                    val hourlyUnixTime12 = lUnixTime12.substring(11 until 16)
+                    val hourlyUnixTime12 = unixTimeChange(hourlyTime12)
                     binding.hourlyTime12.text = hourlyUnixTime12
 
                     val hourlyTime13 = (weatherResponse.hourly[13].dt).toString()
-                    val lUnixTime13 = unixTimeChange(hourlyTime13)
-                    val hourlyUnixTime13 = lUnixTime13.substring(11 until 16)
+                    val hourlyUnixTime13 = unixTimeChange(hourlyTime13)
+
                     binding.hourlyTime13.text = hourlyUnixTime13
 
                     //------------------------------------------------
@@ -557,55 +556,55 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
                     //------------------------------------------------
 
-                    val lHourlyPop1 = weatherResponse.hourly[1].pop
+                    val lHourlyPop1 = (weatherResponse.hourly[1].pop) * 100
                     val hourlyPop1 = lHourlyPop1.roundToLong().toString() + "%"
                     binding.hourlyPop1.text = hourlyPop1
 
-                    val lHourlyPop2 = weatherResponse.hourly[2].pop
+                    val lHourlyPop2 = weatherResponse.hourly[2].pop * 100
                     val hourlyPop2 = lHourlyPop2.roundToLong().toString() + "%"
                     binding.hourlyPop2.text = hourlyPop2
 
-                    val lHourlyPop3 = weatherResponse.hourly[3].pop
+                    val lHourlyPop3 = weatherResponse.hourly[3].pop * 100
                     val hourlyPop3 = lHourlyPop3.roundToLong().toString() + "%"
                     binding.hourlyPop3.text = hourlyPop3
 
-                    val lHourlyPop4 = weatherResponse.hourly[4].pop
+                    val lHourlyPop4 = weatherResponse.hourly[4].pop * 100
                     val hourlyPop4 = lHourlyPop4.roundToLong().toString() + "%"
                     binding.hourlyPop4.text = hourlyPop4
 
-                    val lHourlyPop5 = weatherResponse.hourly[5].pop
+                    val lHourlyPop5 = weatherResponse.hourly[5].pop * 100
                     val hourlyPop5 = lHourlyPop5.roundToLong().toString() + "%"
                     binding.hourlyPop5.text = hourlyPop5
 
-                    val lHourlyPop6 = weatherResponse.hourly[6].pop
+                    val lHourlyPop6 = weatherResponse.hourly[6].pop * 100
                     val hourlyPop6 = lHourlyPop6.roundToLong().toString() + "%"
                     binding.hourlyPop6.text = hourlyPop6
 
-                    val lHourlyPop7 = weatherResponse.hourly[7].pop
+                    val lHourlyPop7 = weatherResponse.hourly[7].pop * 100
                     val hourlyPop7 = lHourlyPop7.roundToLong().toString() + "%"
                     binding.hourlyPop7.text = hourlyPop7
 
-                    val lHourlyPop8 = weatherResponse.hourly[8].pop
+                    val lHourlyPop8 = weatherResponse.hourly[8].pop * 100
                     val hourlyPop8 = lHourlyPop8.roundToLong().toString() + "%"
                     binding.hourlyPop8.text = hourlyPop8
 
-                    val lHourlyPop9 = weatherResponse.hourly[9].pop
+                    val lHourlyPop9 = weatherResponse.hourly[9].pop * 100
                     val hourlyPop9 = lHourlyPop9.roundToLong().toString() + "%"
                     binding.hourlyPop9.text = hourlyPop9
 
-                    val lHourlyPop10 = weatherResponse.hourly[10].pop
+                    val lHourlyPop10 = weatherResponse.hourly[10].pop * 100
                     val hourlyPop10 = lHourlyPop10.roundToLong().toString() + "%"
                     binding.hourlyPop10.text = hourlyPop10
 
-                    val lHourlyPop11 = weatherResponse.hourly[11].pop
+                    val lHourlyPop11 = weatherResponse.hourly[11].pop * 100
                     val hourlyPop11 = lHourlyPop11.roundToLong().toString() + "%"
                     binding.hourlyPop11.text = hourlyPop11
 
-                    val lHourlyPop12 = weatherResponse.hourly[12].pop
+                    val lHourlyPop12 = weatherResponse.hourly[12].pop * 100
                     val hourlyPop12 = lHourlyPop12.roundToLong().toString() + "%"
                     binding.hourlyPop12.text = hourlyPop12
 
-                    val lHourlyPop13 = weatherResponse.hourly[13].pop
+                    val lHourlyPop13 = weatherResponse.hourly[13].pop * 100
                     val hourlyPop13 = lHourlyPop13.roundToLong().toString() + "%"
                     binding.hourlyPop13.text = hourlyPop13
 
@@ -674,7 +673,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     }
 
     private fun unixTimeChange(unixTime: String): String {
-        val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.JAPANESE)
+        val sdf = SimpleDateFormat("HH:mm", Locale.JAPANESE)
         val nowTime = Date(unixTime.toInt() * 1000L)
         return sdf.format(nowTime)
     }
@@ -801,6 +800,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
             .check()
 
     }
+
     override fun onDestroy() {
         super.onDestroy()
         mBinding = null

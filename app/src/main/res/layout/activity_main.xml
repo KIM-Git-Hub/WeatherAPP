@@ -6,92 +6,81 @@
     android:layout_height="match_parent"
     android:background="#FAFAFA"
     android:orientation="vertical"
+    android:weightSum="9"
     tools:context=".MainActivity"
 
     >
 
 
     <LinearLayout
-        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_weight="2"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/address"
+                android:id="@+id/currentTemp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:layout_gravity="center"
+
+                android:textSize="50sp"
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/currentTemp"
+                    android:id="@+id/currentMaxMinTemp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:textSize="15sp"
+                    android:gravity="center"/>
 
-                    android:textSize="50sp"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <TextView
+                    android:id="@+id/feelsLike"
                     android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/currentMaxMinTemp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:textSize="15sp" />
-
-                    <TextView
-                        android:id="@+id/feelsLike"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp" />
 
 
-                    <TextView
-                        android:id="@+id/currentPop"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/time"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp" />
 
 
             </LinearLayout>
 
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginEnd="20dp"
-            android:orientation="vertical">
-
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/clearSky"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -99,8 +88,9 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/fewClouds"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -108,8 +98,9 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/clouds"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -117,8 +108,9 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/rain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -126,8 +118,9 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/thunder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -135,8 +128,9 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/snow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
@@ -144,54 +138,64 @@
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/mist"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="20dp"
                 android:visibility="gone"
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/d50" />
 
+
         </LinearLayout>
+
+
     </LinearLayout>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical">
 
-        <LinearLayout
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
-
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:weightSum="11"
+                android:orientation="vertical">
 
-                <HorizontalScrollView
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbars="none">
+                    android:layout_height="0dp"
+                    android:layout_gravity="start"
+                    android:layout_weight="4"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="10dp"
+                    app:cardMaxElevation="12dp"
+                    app:cardPreventCornerOverlap="true"
+                    app:cardUseCompatPadding="true">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:orientation="vertical">
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="none">
 
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:gravity="center"
+
                             android:orientation="horizontal">
+
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -633,91 +637,503 @@
                                     android:contentDescription="@string/popImage"
                                     app:drawableStartCompat="@drawable/water_drop" />
 
+
                             </LinearLayout>
 
+
                         </LinearLayout>
+                    </HorizontalScrollView>
 
 
-                    </LinearLayout>
-                </HorizontalScrollView>
+                </androidx.cardview.widget.CardView>
 
-
-            </androidx.cardview.widget.CardView>
-
-
-            <LinearLayout
-
-
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_weight="5"
-                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/dayOfWeek1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
+                    android:layout_height="0dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:layout_weight="7"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="end|center"
                         android:orientation="horizontal">
 
-
-                        <LinearLayout
+                        <TextView
+                            android:id="@+id/dayOfWeek1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:gravity="center"
+                            android:layout_gravity="start|center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end|center"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:contentDescription="@string/popImage"
-                                android:src="@drawable/water_drop" />
 
-                            <TextView
-                                android:id="@+id/dailyPop1"
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp" />
-
-                            <ImageView
-                                android:id="@+id/dailyWeatherIcon1"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
                                 android:layout_marginEnd="10dp"
-                                android:contentDescription="@string/weatherIcon" />
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:contentDescription="@string/popImage"
+                                    android:src="@drawable/water_drop" />
+
+                                <TextView
+                                    android:id="@+id/dailyPop1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp" />
+
+                                <ImageView
+                                    android:id="@+id/dailyWeatherIcon1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:contentDescription="@string/weatherIcon" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/dailyMaxTemp1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/dailyMinTemp1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
 
                         </LinearLayout>
 
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                         <TextView
-                            android:id="@+id/dailyMinTemp1"
+                            android:id="@+id/dayOfWeek2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
+                            android:layout_gravity="start|center"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end|center"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:contentDescription="@string/popImage"
+                                    android:src="@drawable/water_drop" />
+
+                                <TextView
+                                    android:id="@+id/dailyPop2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp" />
+
+                                <ImageView
+                                    android:id="@+id/dailyWeatherIcon2"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:contentDescription="@string/weatherIcon" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/dailyMaxTemp2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/dailyMinTemp2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
                         <TextView
-                            android:id="@+id/dailyMaxTemp1"
+                            android:id="@+id/dayOfWeek3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
                             android:textColor="@color/black"
                             android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end|center"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:contentDescription="@string/popImage"
+                                    android:src="@drawable/water_drop" />
+
+                                <TextView
+                                    android:id="@+id/dailyPop3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp" />
+
+                                <ImageView
+                                    android:id="@+id/dailyWeatherIcon3"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:contentDescription="@string/weatherIcon" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/dailyMaxTemp3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/dailyMinTemp3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:id="@+id/dayOfWeek4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end|center"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:layout_gravity="center"
+                                    android:contentDescription="@string/popImage"
+                                    android:src="@drawable/water_drop" />
+
+                                <TextView
+                                    android:id="@+id/dailyPop4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp" />
+
+                                <ImageView
+                                    android:id="@+id/dailyWeatherIcon4"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:contentDescription="@string/weatherIcon" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/dailyMaxTemp4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/dailyMinTemp4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/dayOfWeek5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end|center"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:contentDescription="@string/popImage"
+                                    android:src="@drawable/water_drop" />
+
+                                <TextView
+                                    android:id="@+id/dailyPop5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp" />
+
+                                <ImageView
+                                    android:id="@+id/dailyWeatherIcon5"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:contentDescription="@string/weatherIcon" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/dailyMaxTemp5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/dailyMinTemp5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/dayOfWeek6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end|center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:contentDescription="@string/popImage"
+                                    android:src="@drawable/water_drop" />
+
+                                <TextView
+                                    android:id="@+id/dailyPop6"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp" />
+
+                                <ImageView
+                                    android:id="@+id/dailyWeatherIcon6"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:contentDescription="@string/weatherIcon" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/dailyMaxTemp6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/dailyMinTemp6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/dayOfWeek7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start|center"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="end|center"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:contentDescription="@string/popImage"
+                                    android:src="@drawable/water_drop" />
+
+                                <TextView
+                                    android:id="@+id/dailyPop7"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="10dp" />
+
+                                <ImageView
+                                    android:id="@+id/dailyWeatherIcon7"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+
+                                    android:contentDescription="@string/weatherIcon" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/dailyMaxTemp7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:id="@+id/dailyMinTemp7"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+
+                        </LinearLayout>
+
 
                     </LinearLayout>
 
@@ -725,567 +1141,151 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/dayOfWeek2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/drawable"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="end|center"
-                        android:orientation="horizontal">
+                        android:layout_marginEnd="50dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-
-                        <LinearLayout
+                        <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:contentDescription="@string/sunriseImage"
+                            android:src="@drawable/sunrise" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:contentDescription="@string/popImage"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/dailyPop2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp" />
-
-                            <ImageView
-                                android:id="@+id/dailyWeatherIcon2"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_marginEnd="10dp"
-                                android:contentDescription="@string/weatherIcon" />
-
-                        </LinearLayout>
-
+                            android:text="@string/sunrise"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/dailyMinTemp2"
+                            android:id="@+id/sunrise"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="15sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:contentDescription="@string/sunset"
+                            android:src="@drawable/sunset" />
 
                         <TextView
-                            android:id="@+id/dailyMaxTemp2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:gravity="center"
+                            android:text="@string/sunset"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
-
+                        <TextView
+                            android:id="@+id/sunset"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp" />
                     </LinearLayout>
 
 
                 </LinearLayout>
+
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/dayOfWeek3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/drawable"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="end|center"
-                        android:orientation="horizontal">
+                        android:layout_marginEnd="50dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="5dp"
+                            android:contentDescription="@string/windSpeedImage"
+                            android:src="@drawable/wind" />
 
-                        <LinearLayout
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
                             android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:contentDescription="@string/popImage"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/dailyPop3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp" />
-
-                            <ImageView
-                                android:id="@+id/dailyWeatherIcon3"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_marginEnd="10dp"
-                                android:contentDescription="@string/weatherIcon" />
-                        </LinearLayout>
-
+                            android:text="@string/windSpeed"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/dailyMinTemp3"
+                            android:id="@+id/windSpeedDeg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="5dp"
+                            android:contentDescription="@string/humidityImage"
+                            android:src="@drawable/humidity" />
 
                         <TextView
-                            android:id="@+id/dailyMaxTemp3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
+                            android:gravity="center"
+                            android:text="@string/humidity"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/humidity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp" />
 
                     </LinearLayout>
 
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-                        android:id="@+id/dayOfWeek4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end|center"
-                        android:orientation="horizontal">
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_gravity="center"
-                                android:contentDescription="@string/popImage"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/dailyPop4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp" />
-
-                            <ImageView
-                                android:id="@+id/dailyWeatherIcon4"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_marginEnd="10dp"
-                                android:contentDescription="@string/weatherIcon" />
-                        </LinearLayout>
-
-
-                        <TextView
-                            android:id="@+id/dailyMinTemp4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:id="@+id/dailyMaxTemp4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/dayOfWeek5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end|center"
-                        android:orientation="horizontal">
-
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:contentDescription="@string/popImage"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/dailyPop5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp" />
-
-                            <ImageView
-                                android:id="@+id/dailyWeatherIcon5"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_marginEnd="10dp"
-                                android:contentDescription="@string/weatherIcon" />
-                        </LinearLayout>
-
-
-                        <TextView
-                            android:id="@+id/dailyMinTemp5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:id="@+id/dailyMaxTemp5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/dayOfWeek6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end|center"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:contentDescription="@string/popImage"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/dailyPop6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp" />
-
-                            <ImageView
-                                android:id="@+id/dailyWeatherIcon6"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_marginEnd="10dp"
-                                android:contentDescription="@string/weatherIcon" />
-
-                        </LinearLayout>
-
-
-                        <TextView
-                            android:id="@+id/dailyMinTemp6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:id="@+id/dailyMaxTemp6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/dayOfWeek7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|center"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="end|center"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:contentDescription="@string/popImage"
-                                android:src="@drawable/water_drop" />
-
-                            <TextView
-                                android:id="@+id/dailyPop7"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp" />
-
-                            <ImageView
-                                android:id="@+id/dailyWeatherIcon7"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_marginEnd="10dp"
-                                android:contentDescription="@string/weatherIcon" />
-
-                        </LinearLayout>
-
-
-                        <TextView
-                            android:id="@+id/dailyMinTemp7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:id="@+id/dailyMaxTemp7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/drawable"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="20dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="50dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
+        </ScrollView>
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:contentDescription="@string/sunriseImage"
-                        android:src="@drawable/sunrise" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/sunrise"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/sunrise"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
-                        android:contentDescription="@string/sunset"
-                        android:src="@drawable/sunset" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/sunset"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/sunset"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/drawable"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="20dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="50dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginBottom="5dp"
-                        android:contentDescription="@string/windSpeedImage"
-                        android:src="@drawable/wind" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/windSpeed"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/windSpeedDeg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginBottom="5dp"
-                        android:contentDescription="@string/humidityImage"
-                        android:src="@drawable/humidity" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="@string/humidity"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/humidity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp" />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-    </ScrollView>
-
+    </LinearLayout>
 
 </LinearLayout>
