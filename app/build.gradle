@@ -1,8 +1,16 @@
 plugins {
     id 'com.android.application'
+
     id 'kotlin-android'
+
+
 }
+
+
+
 apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+
 android {
     compileSdk 31
 
@@ -69,12 +77,15 @@ dependencies {
 
     // tedPermission
     implementation 'gun0912.ted:tedpermission:2.0.0'
+
     // cardView
     implementation "androidx.cardview:cardview:1.0.0"
+
     //okHttp
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
     implementation "com.squareup.okhttp3:okhttp-urlconnection:4.9.1"
+
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
@@ -92,4 +103,5 @@ dependencies {
 
     //swipeRefreshLayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
 }

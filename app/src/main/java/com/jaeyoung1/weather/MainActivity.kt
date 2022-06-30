@@ -1,10 +1,6 @@
 package com.jaeyoung1.weather
 
 import android.Manifest
-import android.R
-import android.app.PendingIntent
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -28,6 +24,9 @@ import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.jaeyoung1.weather.databinding.ActivityMainBinding
 import com.squareup.picasso.Picasso
+import io.realm.Realm
+import io.realm.kotlin.createObject
+import io.realm.kotlin.where
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -53,13 +52,11 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
 
     companion object {
-        var ss = "33"
-        private var latitude: Double? = 0.0
-        private var longitude: Double? = 0.0
+        var latitude: Double? = 0.0
+        var longitude: Double? = 0.0
         private const val baseURL = "http://api.openweathermap.org/"
         private const val appId = "01cbde2e5ca2f0fea3d136fe95ce3aa0"
     }
-
 
     private lateinit var locationManager: LocationManager
     private val requestPermissionLauncher = registerForActivityResult(
@@ -80,6 +77,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         }
     }
 
+    private lateinit var realm: Realm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +86,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         val actionBar = supportActionBar
         actionBar?.hide()
+
 
         if (ContextCompat.checkSelfPermission(
                 this,
@@ -105,13 +104,39 @@ class MainActivity : AppCompatActivity(), LocationListener {
         val formatted = current.format(formatter)
         binding.time.text = formatted
 
-
-
-        ss = formatted.toString()
+        realm = Realm.getDefaultInstance()
 
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        deleteData()
+        insertData()
+    }
+
+    private fun insertData() {
+        realm.executeTransaction {
+            val id = realm.where<RealmModel>().max("id")
+
+            val nextId1 = (id?.toLong() ?: 0) + 1
+            val realmObject1 = realm.createObject<RealmModel>(nextId1)
+            realmObject1.text = binding.address.text.toString()
+
+            val nextId2 = (id?.toLong() ?: 0) + 2
+            val realmObject2 = realm.createObject<RealmModel>(nextId2)
+            realmObject2.text = binding.currentTemp.text.toString()
+
+
+        }
+    }
+
+    private fun deleteData() {
+        realm.beginTransaction()
+        val target = realm.where<RealmModel>().findAll()
+        target.deleteAllFromRealm()
+        realm.commitTransaction()
+    }
 
     private fun getWeather(): Job = GlobalScope.launch {
         val retrofit =
@@ -741,6 +766,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
             val address = getAddress(latitude!!, longitude!!)
             binding.address.text = address
+
+
             getWeather()
             getDailyWeather()
 
@@ -804,6 +831,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
     override fun onDestroy() {
         super.onDestroy()
         mBinding = null
+        realm.close()
     }
 
 
