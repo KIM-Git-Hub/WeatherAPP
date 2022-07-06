@@ -1,6 +1,8 @@
 package com.jaeyoung1.weather
 
 import android.Manifest
+import android.appwidget.AppWidgetManager
+import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -78,6 +80,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
     }
 
     private lateinit var realm: Realm
+    var appWidgetIcon = ""
+    var appWidgetTime = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,7 +107,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         val formatter = DateTimeFormatter.ofPattern("HH:mm")
         val formatted = current.format(formatter)
         binding.time.text = formatted
-
+        appWidgetTime = formatted.toString()
         realm = Realm.getDefaultInstance()
 
 
@@ -127,6 +131,13 @@ class MainActivity : AppCompatActivity(), LocationListener {
             val realmObject2 = realm.createObject<RealmModel>(nextId2)
             realmObject2.text = binding.currentTemp.text.toString()
 
+            val nextId3 = (id?.toLong() ?: 0) + 3
+            val realmObject3 = realm.createObject<RealmModel>(nextId3)
+            realmObject3.text = appWidgetIcon
+
+            val nextId4 = (id?.toLong() ?: 0) + 4
+            val realmObject4 = realm.createObject<RealmModel>(nextId4)
+            realmObject4.text = appWidgetTime
 
         }
     }
@@ -180,7 +191,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     val lWindDeg = weatherResponse.wind!!.deg
                     val windDeg = windDegPosition(lWindDeg)
                     val lIcon = weatherResponse.weather[0].icon
-                    Log.d("icon", lIcon.toString())
+                    appWidgetIcon = lIcon.toString()
                     when (lIcon) {
                         "01d" -> binding.clearSky.visibility = View.VISIBLE
                         "02d" -> binding.fewClouds.visibility = View.VISIBLE
