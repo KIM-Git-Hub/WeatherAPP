@@ -15,7 +15,6 @@ import io.realm.kotlin.where
 class WidgetProvider : AppWidgetProvider() {
 
     private lateinit var realm: Realm
-    val actionBTN = "ButtonClick"
 
     override fun onUpdate(
         context: Context?,
@@ -67,6 +66,7 @@ class WidgetProvider : AppWidgetProvider() {
         }
 
         views.setTextViewText(R.id.updateTime, realmResult[3]?.text)
+        views.setTextViewText(R.id.dayOfWeekWidget1, realmResult[4]?.text)
 
         return views
     }

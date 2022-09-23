@@ -11,28 +11,41 @@
 
     <TextView
         android:id="@+id/currentAddressWidget"
+        android:textSize="11sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
         tools:ignore="UseCompoundDrawables">
 
 
         <ImageView
+
             android:id="@+id/weatherIcon"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginEnd="5dp"
             android:contentDescription="@string/weatherIcon"
             android:src="@drawable/clear_sky" />
 
         <TextView
+            android:textSize="20sp"
             android:id="@+id/currentTempWidget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <TextView
+            android:textSize="20sp"
+            android:id="@+id/dayOfWeekWidget1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
 
 
     </LinearLayout>
@@ -44,12 +57,9 @@
         android:orientation="horizontal">
 
 
-        <Button
-            android:id="@+id/testButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
 
         <TextView
+            android:textSize="11sp"
             android:id="@+id/updateTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

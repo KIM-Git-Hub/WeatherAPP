@@ -125,19 +125,26 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
             val nextId1 = (id?.toLong() ?: 0) + 1
             val realmObject1 = realm.createObject<RealmModel>(nextId1)
-            realmObject1.text = binding.address.text.toString()
+            realmObject1.text = binding.address.text.toString() //위젯 주소
 
             val nextId2 = (id?.toLong() ?: 0) + 2
             val realmObject2 = realm.createObject<RealmModel>(nextId2)
-            realmObject2.text = binding.currentTemp.text.toString()
+            realmObject2.text = binding.currentTemp.text.toString() // 위젯 현재 날씨
 
             val nextId3 = (id?.toLong() ?: 0) + 3
             val realmObject3 = realm.createObject<RealmModel>(nextId3)
-            realmObject3.text = appWidgetIcon
+            realmObject3.text = appWidgetIcon // 위젯 현재 날씨
 
             val nextId4 = (id?.toLong() ?: 0) + 4
             val realmObject4 = realm.createObject<RealmModel>(nextId4)
-            realmObject4.text = appWidgetTime
+            realmObject4.text = appWidgetTime //위젯 업뎃 날짜
+
+            val nextId5 = (id?.toLong() ?: 0) + 5
+            val realmObject5 = realm.createObject<RealmModel>(nextId5)
+            realmObject5.text = binding.dayOfWeek1.text.toString() // 다음 요일
+
+
+
 
         }
     }
