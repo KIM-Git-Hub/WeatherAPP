@@ -11,15 +11,16 @@
 
     <TextView
         android:id="@+id/currentAddressWidget"
-        android:textSize="11sp"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="15sp" />
 
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:gravity="center"
         android:orientation="horizontal"
         tools:ignore="UseCompoundDrawables">
@@ -28,24 +29,85 @@
         <ImageView
 
             android:id="@+id/weatherIcon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="5dp"
-            android:contentDescription="@string/weatherIcon"
-            android:src="@drawable/clear_sky" />
+            android:contentDescription="@string/weatherIcon" />
 
         <TextView
-            android:textSize="20sp"
             android:id="@+id/currentTempWidget"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="40sp" />
 
-        <TextView
-            android:textSize="20sp"
-            android:id="@+id/dayOfWeekWidget1"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <ImageView
+                android:id="@+id/weatherIcon2"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginBottom="3dp"
+                android:contentDescription="@string/weatherIcon" />
+
+            <TextView
+                android:id="@+id/dayOfWeekWidget1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/weatherIcon3"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginBottom="3dp"
+                android:contentDescription="@string/weatherIcon" />
+
+            <TextView
+                android:id="@+id/dayOfWeekWidget2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/weatherIcon4"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginBottom="3dp"
+                android:contentDescription="@string/weatherIcon" />
+
+            <TextView
+                android:id="@+id/dayOfWeekWidget3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="11sp" />
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -57,12 +119,11 @@
         android:orientation="horizontal">
 
 
-
         <TextView
-            android:textSize="11sp"
             android:id="@+id/updateTime"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="11sp" />
 
 
     </LinearLayout>

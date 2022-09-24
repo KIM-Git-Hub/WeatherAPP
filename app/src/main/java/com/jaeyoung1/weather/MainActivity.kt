@@ -80,7 +80,10 @@ class MainActivity : AppCompatActivity(), LocationListener {
     }
 
     private lateinit var realm: Realm
-    var appWidgetIcon = ""
+    var appWidgetIcon = "" //현재 날씨 아이콘
+    var appWidgetIcon2 = "" //다음날 날씨 아이콘
+    var appWidgetIcon3 = "" //다다음날 날씨 아이콘
+    var appWidgetIcon4 = "" //다다다음날 날씨 아이콘
     var appWidgetTime = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,7 +107,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
 
         val current = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("HH:mm")
+        val formatter = DateTimeFormatter.ofPattern("MM/dd HH:mm")
         val formatted = current.format(formatter)
         binding.time.text = formatted
         appWidgetTime = formatted.toString()
@@ -129,7 +132,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
             val nextId2 = (id?.toLong() ?: 0) + 2
             val realmObject2 = realm.createObject<RealmModel>(nextId2)
-            realmObject2.text = binding.currentTemp.text.toString() // 위젯 현재 날씨
+            realmObject2.text = binding.currentTemp.text.toString() // 위젯 현재 온도
 
             val nextId3 = (id?.toLong() ?: 0) + 3
             val realmObject3 = realm.createObject<RealmModel>(nextId3)
@@ -143,7 +146,25 @@ class MainActivity : AppCompatActivity(), LocationListener {
             val realmObject5 = realm.createObject<RealmModel>(nextId5)
             realmObject5.text = binding.dayOfWeek1.text.toString() // 다음 요일
 
+            val nextId6 = (id?.toLong() ?: 0) + 6
+            val realmObject6 = realm.createObject<RealmModel>(nextId6)
+            realmObject6.text = appWidgetIcon2 // 다음날 날씨 아이콘
 
+            val nextId7 = (id?.toLong() ?: 0) + 7
+            val realmObject7 = realm.createObject<RealmModel>(nextId7)
+            realmObject7.text = binding.dayOfWeek2.text.toString() // 다다음 요일
+
+            val nextId8 = (id?.toLong() ?: 0) + 8
+            val realmObject8 = realm.createObject<RealmModel>(nextId8)
+            realmObject8.text = appWidgetIcon3 // 다다음날 날씨 아이콘
+
+            val nextId9 = (id?.toLong() ?: 0) + 9
+            val realmObject9 = realm.createObject<RealmModel>(nextId9)
+            realmObject9.text = binding.dayOfWeek3.text.toString() // 다다다음 요일
+
+            val nextId10 = (id?.toLong() ?: 0) + 10
+            val realmObject10 = realm.createObject<RealmModel>(nextId10)
+            realmObject10.text = appWidgetIcon4 // 다다다음날 날씨 아이콘
 
 
         }
@@ -198,7 +219,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                     val lWindDeg = weatherResponse.wind!!.deg
                     val windDeg = windDegPosition(lWindDeg)
                     val lIcon = weatherResponse.weather[0].icon
-                    appWidgetIcon = lIcon.toString()
+                    appWidgetIcon = lIcon.toString() //현재 날씨 아이콘
                     when (lIcon) {
                         "01d" -> binding.clearSky.visibility = View.VISIBLE
                         "02d" -> binding.fewClouds.visibility = View.VISIBLE
@@ -272,14 +293,17 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
 
                     val dIcon1 = weatherResponse!!.daily[1].weather[0].icon
+                    appWidgetIcon2 = dIcon1.toString() //위젯에 쓸 다음날 아이콘
                     val dailyIconUrl1 = "http://openweathermap.org/img/w/$dIcon1.png"
                     Picasso.get().load(dailyIconUrl1).into(binding.dailyWeatherIcon1)
 
                     val dIcon2 = weatherResponse.daily[2].weather[0].icon
+                    appWidgetIcon3 = dIcon1.toString() //위젯에 쓸 다다음날 아이콘
                     val dailyIconUrl2 = "http://openweathermap.org/img/w/$dIcon2.png"
                     Picasso.get().load(dailyIconUrl2).into(binding.dailyWeatherIcon2)
 
                     val dIcon3 = weatherResponse.daily[3].weather[0].icon
+                    appWidgetIcon4 = dIcon1.toString() //위젯에 쓸 다다다음날 아이콘
                     val dailyIconUrl3 = "http://openweathermap.org/img/w/$dIcon3.png"
                     Picasso.get().load(dailyIconUrl3).into(binding.dailyWeatherIcon3)
 

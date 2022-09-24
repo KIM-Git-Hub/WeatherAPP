@@ -66,8 +66,72 @@ class WidgetProvider : AppWidgetProvider() {
         }
 
         views.setTextViewText(R.id.updateTime, realmResult[3]?.text)
-        views.setTextViewText(R.id.dayOfWeekWidget1, realmResult[4]?.text)
 
+        views.setTextViewText(R.id.dayOfWeekWidget1, realmResult[4]?.text)
+        when (realmResult[5]?.text) {
+            "01d" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.clear_sky)
+            "02d" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.few_clouds)
+            "03d" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.clouds)
+            "04d" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.clouds)
+            "09d" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.rain)
+            "10d" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.rain)
+            "11d" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.thunder)
+            "13d" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.snow)
+            "50d" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.mist)
+            "01n" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.clear_sky)
+            "02n" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.few_clouds)
+            "03n" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.clouds)
+            "04n" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.clouds)
+            "09n" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.rain)
+            "10n" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.rain)
+            "11n" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.thunder)
+            "13n" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.snow)
+            "50n" -> views.setImageViewResource(R.id.weatherIcon2, R.drawable.mist)
+        }
+
+        views.setTextViewText(R.id.dayOfWeekWidget2, realmResult[6]?.text)
+        when (realmResult[7]?.text) {
+            "01d" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.clear_sky)
+            "02d" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.few_clouds)
+            "03d" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.clouds)
+            "04d" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.clouds)
+            "09d" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.rain)
+            "10d" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.rain)
+            "11d" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.thunder)
+            "13d" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.snow)
+            "50d" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.mist)
+            "01n" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.clear_sky)
+            "02n" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.few_clouds)
+            "03n" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.clouds)
+            "04n" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.clouds)
+            "09n" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.rain)
+            "10n" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.rain)
+            "11n" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.thunder)
+            "13n" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.snow)
+            "50n" -> views.setImageViewResource(R.id.weatherIcon3, R.drawable.mist)
+        }
+
+        views.setTextViewText(R.id.dayOfWeekWidget3, realmResult[8]?.text)
+        when (realmResult[9]?.text) {
+            "01d" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.clear_sky)
+            "02d" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.few_clouds)
+            "03d" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.clouds)
+            "04d" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.clouds)
+            "09d" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.rain)
+            "10d" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.rain)
+            "11d" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.thunder)
+            "13d" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.snow)
+            "50d" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.mist)
+            "01n" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.clear_sky)
+            "02n" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.few_clouds)
+            "03n" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.clouds)
+            "04n" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.clouds)
+            "09n" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.rain)
+            "10n" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.rain)
+            "11n" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.thunder)
+            "13n" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.snow)
+            "50n" -> views.setImageViewResource(R.id.weatherIcon4, R.drawable.mist)
+        }
         return views
     }
 
