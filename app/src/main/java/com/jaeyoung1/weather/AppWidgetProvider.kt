@@ -1,8 +1,6 @@
 package com.jaeyoung1.weather
 
 import android.app.PendingIntent
-import android.app.PendingIntent.FLAG_IMMUTABLE
-import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
@@ -66,6 +64,7 @@ class WidgetProvider : AppWidgetProvider() {
         }
 
         views.setTextViewText(R.id.updateTime, realmResult[3]?.text)
+
 
         views.setTextViewText(R.id.dayOfWeekWidget1, realmResult[4]?.text)
         when (realmResult[5]?.text) {

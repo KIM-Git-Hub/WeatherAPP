@@ -1,8 +1,6 @@
 package com.jaeyoung1.weather
 
 import android.Manifest
-import android.appwidget.AppWidgetManager
-import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,6 +8,8 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -42,6 +42,8 @@ import retrofit2.http.Query
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+
+
 import java.util.*
 import kotlin.math.roundToLong
 import kotlin.system.exitProcess
@@ -84,7 +86,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
     var appWidgetIcon2 = "" //다음날 날씨 아이콘
     var appWidgetIcon3 = "" //다다음날 날씨 아이콘
     var appWidgetIcon4 = "" //다다다음날 날씨 아이콘
-    var appWidgetTime = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,6 +94,12 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         val actionBar = supportActionBar
         actionBar?.hide()
+
+        if(!getNetWorkStatusCheck(this)){
+            Toast.makeText(this, "ネットワークが不安定です。接続を確認してください。", Toast.LENGTH_LONG).show()
+            ActivityCompat.finishAffinity(this)
+            exitProcess(0)
+        }
 
 
         if (ContextCompat.checkSelfPermission(
@@ -110,7 +117,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
         val formatter = DateTimeFormatter.ofPattern("MM/dd HH:mm")
         val formatted = current.format(formatter)
         binding.time.text = formatted
-        appWidgetTime = formatted.toString()
         realm = Realm.getDefaultInstance()
 
 
@@ -120,6 +126,22 @@ class MainActivity : AppCompatActivity(), LocationListener {
         super.onPause()
         deleteData()
         insertData()
+    }
+
+    //인터넷 연결 확인 (networkInfo 는  deprecated)
+    private fun getNetWorkStatusCheck(context: Context): Boolean{
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        val nw = connectivityManager.activeNetwork ?: return false
+        val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
+
+        return when{
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_BLUETOOTH) -> true
+            else -> false
+        }
     }
 
     private fun insertData() {
@@ -140,7 +162,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
             val nextId4 = (id?.toLong() ?: 0) + 4
             val realmObject4 = realm.createObject<RealmModel>(nextId4)
-            realmObject4.text = appWidgetTime //위젯 업뎃 날짜
+            realmObject4.text = binding.time.text.toString() //위젯 업뎃 날짜
+
 
             val nextId5 = (id?.toLong() ?: 0) + 5
             val realmObject5 = realm.createObject<RealmModel>(nextId5)

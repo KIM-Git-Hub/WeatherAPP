@@ -38,7 +38,7 @@
             android:id="@+id/currentTempWidget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="40sp" />
+            android:textSize="30sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -49,8 +49,8 @@
 
             <ImageView
                 android:id="@+id/weatherIcon2"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_marginBottom="3dp"
                 android:contentDescription="@string/weatherIcon" />
 
@@ -72,8 +72,8 @@
 
             <ImageView
                 android:id="@+id/weatherIcon3"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_marginBottom="3dp"
                 android:contentDescription="@string/weatherIcon" />
 
@@ -95,8 +95,8 @@
 
             <ImageView
                 android:id="@+id/weatherIcon4"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_marginBottom="3dp"
                 android:contentDescription="@string/weatherIcon" />
 
@@ -112,11 +112,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+
 
 
         <TextView
@@ -126,7 +122,6 @@
             android:textSize="11sp" />
 
 
-    </LinearLayout>
 
 
 </LinearLayout>
