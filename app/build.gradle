@@ -89,11 +89,6 @@ dependencies {
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
-    //room db
-    implementation 'androidx.room:room-runtime:2.4.2'
-    kapt 'androidx.room:room-compiler:2.4.2'
-    kapt "org.xerial:sqlite-jdbc:3.36.0" //맥북m1 room 충돌
-
     //lottie
     implementation "com.airbnb.android:lottie:3.4.0"
 
@@ -101,8 +96,6 @@ dependencies {
     implementation("androidx.glance:glance-appwidget:1.0.0-alpha03")
     implementation("androidx.glance:glance-wear-tiles:1.0.0-alpha03")
 
-    //swipeRefreshLayout
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     implementation 'androidx.work:work-runtime-ktx:2.7.1'
 }
