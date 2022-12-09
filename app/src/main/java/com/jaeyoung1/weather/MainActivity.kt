@@ -61,6 +61,8 @@ class MainActivity : AppCompatActivity(), LocationListener {
         private const val appId = "01cbde2e5ca2f0fea3d136fe95ce3aa0"
     }
 
+
+
     private lateinit var locationManager: LocationManager
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -820,10 +822,11 @@ class MainActivity : AppCompatActivity(), LocationListener {
 
         locationManager.requestLocationUpdates(
             LocationManager.GPS_PROVIDER,
-            10000,
-            50f,
+            500,
+            1f,
             this
         )
+        locationManager.removeUpdates(this)
 
     }
 
@@ -839,9 +842,11 @@ class MainActivity : AppCompatActivity(), LocationListener {
             val address = getAddress(latitude!!, longitude!!)
             binding.address.text = address
 
-
             getWeather()
             getDailyWeather()
+
+
+
 
         }
 
