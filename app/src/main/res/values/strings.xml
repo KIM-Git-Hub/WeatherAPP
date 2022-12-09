@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">weather</string>
+    <string name="app_name">Weather-天気</string>
     <string name="sunrise">日の出</string>
     <string name="sunriseImage">sunriseImage</string>
     <string name="sunset">日の出</string>
