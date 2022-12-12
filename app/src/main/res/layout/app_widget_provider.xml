@@ -14,6 +14,7 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:textSize="15sp" />
 
     <LinearLayout
@@ -25,20 +26,29 @@
         android:orientation="horizontal"
         tools:ignore="UseCompoundDrawables">
 
-
-        <ImageView
-
-            android:id="@+id/weatherIcon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="5dp"
-            android:contentDescription="@string/weatherIcon" />
-
-        <TextView
-            android:id="@+id/currentTempWidget"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center">
+            <ImageView
+
+                android:id="@+id/weatherIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="5dp"
+                android:contentDescription="@string/weatherIcon" />
+
+            <TextView
+                android:id="@+id/currentTempWidget"
+                android:layout_marginBottom="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40sp" />
+        </LinearLayout>
+
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -49,8 +59,8 @@
 
             <ImageView
                 android:id="@+id/weatherIcon2"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="3dp"
                 android:contentDescription="@string/weatherIcon" />
 
@@ -58,7 +68,8 @@
                 android:id="@+id/dayOfWeekWidget1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="11sp" />
+                android:textColor="@color/black"
+                android:textSize="13sp" />
 
 
         </LinearLayout>
@@ -72,8 +83,8 @@
 
             <ImageView
                 android:id="@+id/weatherIcon3"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="3dp"
                 android:contentDescription="@string/weatherIcon" />
 
@@ -81,7 +92,8 @@
                 android:id="@+id/dayOfWeekWidget2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="11sp" />
+                android:textColor="@color/black"
+                android:textSize="13sp"/>
 
 
         </LinearLayout>
@@ -95,8 +107,8 @@
 
             <ImageView
                 android:id="@+id/weatherIcon4"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginBottom="3dp"
                 android:contentDescription="@string/weatherIcon" />
 
@@ -104,7 +116,8 @@
                 android:id="@+id/dayOfWeekWidget3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="11sp" />
+                android:textColor="@color/black"
+                android:textSize="13sp" /> />
 
 
         </LinearLayout>
@@ -119,7 +132,8 @@
             android:id="@+id/updateTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="11sp" />
+            android:textSize="12sp"
+            android:textColor="@color/black"/>
 
 
 

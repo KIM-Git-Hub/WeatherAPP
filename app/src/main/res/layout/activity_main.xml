@@ -24,6 +24,7 @@
             android:id="@+id/address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -37,6 +38,7 @@
 
             <TextView
                 android:id="@+id/currentTemp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -54,11 +56,13 @@
                     android:id="@+id/currentMaxMinTemp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:textSize="15sp"
                     android:gravity="center"/>
 
                 <TextView
                     android:id="@+id/feelsLike"
+                    android:textColor="@color/black"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -68,6 +72,7 @@
                 <TextView
                     android:id="@+id/time"
                     android:gravity="center"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="15sp" />
