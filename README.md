@@ -10,7 +10,7 @@ Google Play ストア : https://play.google.com/store/apps/details?id=com.jaeyou
 
 <img src="https://user-images.githubusercontent.com/100995721/211796340-0e573f85-a5d1-4da3-805e-e8b3e4c50b1a.jpg"  width="30%" height="30%">
 (ホーム画面)<br/> 
-１．12時間の詳細な天気確認が可能<br/> 
+１．12時間の詳細な天気予報を確認可能<br/> 
 ２．一周間の天気予報を確認可能<br/> <br/> 
 <img src="https://user-images.githubusercontent.com/100995721/211796321-eb42335c-f0c0-4b63-a9d5-802b52821547.jpg"  width="30%" height="30%">
 ３．日の出・日の入り・風速・湿度を確認可能<br/> <br/> 
