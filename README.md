@@ -15,14 +15,15 @@ Google Play ストア : https://play.google.com/store/apps/details?id=com.jaeyou
 <img src="https://user-images.githubusercontent.com/100995721/211796321-eb42335c-f0c0-4b63-a9d5-802b52821547.jpg"  width="30%" height="30%">
 ３．日の出・日の入り・風速・湿度を確認可能<br/> <br/> 
 <img src="https://user-images.githubusercontent.com/100995721/211796346-fe25ab15-11d9-45a7-a0fc-60c5cb20be54.jpg"  width="30%" height="30%">
-（ウィジェット画面）
-ウィジェットをタッチ、WeatherAPPのホーム画面に移動　<br/>
-※ウィジェットはWeatherAPPが終了した、数分後にアップデートされる。（改善必要）
+（ウィジェット画面）<br/>
+４．ウィジェットをタッチ、WeatherAPPのホーム画面に移動　<br/>
+※ウィジェットはWeatherAPPが終了した、数分後にアップデートされる。（改善必要）<br/><br/>
 
 # Library
 Retrofit<br/> <br/> 
 Coroutines<br/> <br/> 
 TedPermission<br/> <br/> 
 Picasso<br/> <br/> 
+Realm Database <br/> 
 Lottie<br/> <br/>  <br/>
 API : OpenWeatherMap [https://openweathermap.org/]
