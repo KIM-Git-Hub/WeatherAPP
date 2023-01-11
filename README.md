@@ -1,9 +1,22 @@
 # WeatherAPP
+<img src="https://user-images.githubusercontent.com/100995721/211795727-30717ccf-0450-47a2-94c5-c0f370b2788b.png"  width="200" height="200"><br/><br/> 
+一週間の天気予報を簡単に知ることができるアプリケーション
 
 # Installation
-<img src="https://user-images.githubusercontent.com/100995721/210514241-c49ebe27-8f74-4a3d-85bd-316c25925b6b.png"  width="200" height="200">
+<img src="https://user-images.githubusercontent.com/100995721/211795450-e4900000-2fa3-43a7-820f-b42b30d98110.png"  width="200" height="200">
 Google Play ストア : https://play.google.com/store/apps/details?id=com.jaeyoung1.weather
 
 # Usage
 
+<img src="https://user-images.githubusercontent.com/100995721/211796340-0e573f85-a5d1-4da3-805e-e8b3e4c50b1a.jpg"  width="30%" height="30%">
+<img src="https://user-images.githubusercontent.com/100995721/211796321-eb42335c-f0c0-4b63-a9d5-802b52821547.jpg"  width="30%" height="30%">
+<img src="https://user-images.githubusercontent.com/100995721/211796346-fe25ab15-11d9-45a7-a0fc-60c5cb20be54.jpg"  width="30%" height="30%">
+
+
 # Library
+Retrofit<br/> <br/> 
+Coroutines<br/> <br/> 
+TedPermission<br/> <br/> 
+Picasso<br/> <br/> 
+Lottie<br/> <br/>  <br/>
+API : OpenWeatherMap [https://openweathermap.org/]
