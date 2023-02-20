@@ -17,8 +17,7 @@ Google Play ストア : https://play.google.com/store/apps/details?id=com.jaeyou
 <img src="https://user-images.githubusercontent.com/100995721/211796346-fe25ab15-11d9-45a7-a0fc-60c5cb20be54.jpg"  width="30%" height="30%">
 （ウィジェット画面）<br/>
 ４．簡単な天気予報を確認可能<br/>
-５．ウィジェットをクリック、WeatherAPPのホーム画面に移動　<br/>
-※ウィジェットはWeatherAPPが終了した、数分後にアップデートされる。（改善必要）<br/><br/>
+５．ウィジェットをクリック、WeatherAPPのホーム画面に移動　<br/><br/>
 
 # Library
 Retrofit<br/> <br/> 
