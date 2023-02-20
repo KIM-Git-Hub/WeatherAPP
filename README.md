@@ -1,4 +1,4 @@
-# WeatherAPP
+# Weather-天気
 <img src="https://user-images.githubusercontent.com/100995721/211795727-30717ccf-0450-47a2-94c5-c0f370b2788b.png"  width="200" height="200"><br/><br/> 
 一週間の天気予報を簡単に知ることができるアプリケーション
 
