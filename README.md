@@ -1,7 +1,7 @@
 # Weather-天気
 <img src="https://user-images.githubusercontent.com/100995721/211795727-30717ccf-0450-47a2-94c5-c0f370b2788b.png"  width="200" height="200"><br/><br/> 
 1週間の天気予報や12時間の詳細な天気予報を提供し、湿度、風速など様々な天気情報を提供するアプリケーションです。 <br/> 
-ウィジェット機能を通じてホーム画面で簡単な天気情報を確認することもできます。
+ウィジェット機能を通じてホーム画面で簡単に天気情報を確認することもできます。
 
 # Installation
 <img src="https://user-images.githubusercontent.com/100995721/211795450-e4900000-2fa3-43a7-820f-b42b30d98110.png"  width="200" height="200">
